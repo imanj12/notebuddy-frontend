@@ -31,10 +31,19 @@
   }
 } */
 
+#root {
+  height: 100%;
+}
+
 .welcome {
-  background-image: url('./imgs/adventure-balance-balanced-7640-copy.jpeg');
+  height: 100%;
+  background-image: url('./imgs/adult-alone-blur-1172207.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+.welcome-grid {
+  
 }

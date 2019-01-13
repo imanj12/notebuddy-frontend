@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from 'react'
-import {Grid, Row, Segment, Menu, Header} from 'semantic-ui-react'
+import React, {Component} from 'react'
+import {Grid, Menu, Header} from 'semantic-ui-react'
 import SignUpForm from '../components/SignUpForm'
 
 class Welcome extends Component {
@@ -9,11 +9,11 @@ class Welcome extends Component {
 
    render () {
       return (
-         <div class='welcome' style={{ height: '100%' }}>
+         <div className='welcome'>
             <Menu secondary size='massive'>
-               <Menu.Item name='notbuddy logo here'/>
+               <Menu.Item name='notebuddy logo here'/>
             </Menu>
-            <Grid columns={2} divided padded>
+            <Grid id='welcome-grid' columns={3} verticalAlign='middle'>
                <Grid.Column textAlign='center'>
                   <Header as='h1' inverted>
                      Focus. Record. Do.
@@ -25,7 +25,8 @@ class Welcome extends Component {
                      Free up time in your life for what matters most.
                   </Header>
                </Grid.Column>
-               <Grid.Column textAlign='center'>
+               <Grid.Column />
+               <Grid.Column style={{ maxWidth: 450 }} textAlign='center'>
                   <SignUpForm/>
                </Grid.Column>
             </Grid>
