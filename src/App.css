@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -29,4 +29,12 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.welcome {
+  background-image: url('./imgs/adventure-balance-balanced-7640-copy.jpeg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
