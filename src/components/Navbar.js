@@ -1,32 +1,37 @@
 import React, {Component} from 'react'
-import { Input, Menu } from 'semantic-ui-react'
+import {Menu, Button} from 'semantic-ui-react'
+import {withRouter} from 'react-router-dom'
+const Cookies = require('cookies-js')
 
-class Navbar extends Component {
-	state = { 
-		activeItem: 'home' 
-	}
+class NavBar extends Component {
 
-	handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+   logOut = () => {
+      Cookies.expire('token')
+      this.props.setUser(null)
+      this.props.history.push('/')
+   }
 
-	render() {
-		const { activeItem } = this.state
-
-		return (
-			<Menu>
-				<Menu.Item name='notebuddy logo' active={activeItem === 'home'} onClick={this.handleItemClick} />
-				<Menu.Menu position='right'>
-					<Menu.Item>
-					<Input icon='search' placeholder='Search...' />
-					</Menu.Item>
-					<Menu.Item
-					name='logout'
-					active={activeItem === 'logout'}
-					onClick={this.handleItemClick}
-					/>
-				</Menu.Menu>
-			</Menu>
-		)
+   render() {
+      return (
+         <Menu size='massive' borderless>
+            <Menu.Item name='notebuddy logo here'/>
+            {this.props.user ? (
+               <Menu.Menu position='right'>
+                  <Menu.Item>
+                     <Button 
+                        color='teal'
+                        onClick={this.logOut}
+                     >
+                        Log-out
+                     </Button>
+                  </Menu.Item>
+               </Menu.Menu>
+            ) : null}
+            
+         </Menu>
+      )
    }
 }
 
-export default Navbar
+export default withRouter(NavBar)
+

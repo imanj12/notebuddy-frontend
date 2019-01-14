@@ -44,6 +44,6 @@
   background-attachment: fixed;
 }
 
-.welcome-grid {
-  
+#welcome-grid {
+  padding-top: 10%;
 }

@@ -1,5 +1,7 @@
 import React, {Component, Fragment} from 'react'
-import { Divider, Button, Form, Grid, Header, Segment} from 'semantic-ui-react'
+import { Divider, Button, Form, Header, Segment} from 'semantic-ui-react'
+import SignInForm from './SignInForm'
+import {withRouter} from 'react-router-dom'
 const Cookies = require('cookies-js')
 
 class SignUpForm extends Component {
@@ -27,7 +29,8 @@ class SignUpForm extends Component {
          .then(r => r.json())
          .then(data => {
             Cookies.set('token', data.jwt)
-            // this.props.history.push('/home')
+            this.props.setUser(data.user)
+            this.props.history.push('/home')
          })
    }
 
@@ -36,7 +39,15 @@ class SignUpForm extends Component {
          <Fragment>
             <Segment raised>
                <Form size='large'>
-                  <Form.Input fluid name ='username' icon='user' iconPosition='left' placeholder='E-mail address' onChange={this.handleChange} />
+                  <Form.Input 
+                     fluid 
+                     name ='username' 
+                     icon='user' 
+                     iconPosition='left' 
+                     placeholder='E-mail address' 
+                     value={this.state.username}
+                     onChange={this.handleChange} 
+                     />
                   <Form.Input
                      fluid
                      name='password'
@@ -44,6 +55,7 @@ class SignUpForm extends Component {
                      iconPosition='left'
                      placeholder='Password'
                      type='password'
+                     value={this.state.password}
                      onChange={this.handleChange}
                   />
                   <Form.Input
@@ -53,6 +65,7 @@ class SignUpForm extends Component {
                      iconPosition='left'
                      placeholder='Confirm Password'
                      type='password'
+                     value={this.state.password_confirmation}
                      onChange={this.handleChange}
                   />
                   <Button 
@@ -67,11 +80,9 @@ class SignUpForm extends Component {
             <Divider horizontal>Or</Divider>
             <Segment>
                <Header as='h4'>Use either method to sign in</Header>
-               <Divider horizontal></Divider>
-               <Button color='teal' fluid size='large'>
-                  Sign In
-               </Button>
-               <Divider horizontal></Divider>
+               <Divider horizontal />
+               <SignInForm setUser={this.props.setUser}/>
+               <Divider horizontal />
                <Button color='teal' fluid size='large'>
                   Sign In with Google
                </Button>
@@ -80,5 +91,5 @@ class SignUpForm extends Component {
       )
    }
 }
-export default SignUpForm
+export default withRouter(SignUpForm)
 

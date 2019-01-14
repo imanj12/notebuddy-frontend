@@ -1,18 +1,12 @@
 import React, {Component} from 'react'
-import {Grid, Menu, Header} from 'semantic-ui-react'
+import {Grid, Header} from 'semantic-ui-react'
 import SignUpForm from '../components/SignUpForm'
 
 class Welcome extends Component {
-   state = {
-      
-   }
-
+   
    render () {
       return (
          <div className='welcome'>
-            <Menu secondary size='massive'>
-               <Menu.Item name='notebuddy logo here'/>
-            </Menu>
             <Grid id='welcome-grid' columns={3} verticalAlign='middle'>
                <Grid.Column textAlign='center'>
                   <Header as='h1' inverted>
@@ -27,7 +21,7 @@ class Welcome extends Component {
                </Grid.Column>
                <Grid.Column />
                <Grid.Column style={{ maxWidth: 450 }} textAlign='center'>
-                  <SignUpForm/>
+                  <SignUpForm setUser={this.props.setUser}/>
                </Grid.Column>
             </Grid>
          </div>
