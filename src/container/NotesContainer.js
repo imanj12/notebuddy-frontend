@@ -22,7 +22,7 @@ class NotesContainer extends Component {
                      handleItemClick={this.handleItemClick}
                   >                    
                   </NoteItem>
-                  ))
+                  )).reverse()
                }
             </Menu>
          </Fragment>

@@ -29,7 +29,7 @@ class Editor extends Component {
          content: this.state.text
       }}
       const fetchParams = {
-         method: 'PATCH',
+         method: 'PUT',
          headers: {
             'Content-Type':'application/json',
             'Authorization':`Bearer ${token}`
@@ -48,8 +48,10 @@ class Editor extends Component {
       return ( 
          <Fragment>
             <Segment basic>
-               <Input value={this.state.title} onChange={this.handleTitleChange}></Input>
                <Button circular icon color='teal' onClick={this.saveNote}><Icon name='save'/></Button>
+            </Segment>
+            <Segment basic>
+               <Input size='huge' value={this.state.title} onChange={this.handleTitleChange}></Input>
                {/* <Button circular icon color='red'><Icon name='delete'/></Button> */}
             </Segment>
             <Segment basic>

@@ -12,9 +12,13 @@ class SideMenu extends Component {
 		this.setState({[e.target.name]: e.target.value})
 	}
 
-	handleItemClick = (e, { name }) => this.setState({})
+	handleItemClick = (e, { name }) => {
+		// this.setState({})
+		this.setState({isOpen: !this.state.isOpen})
+	}
 
 	handleSubmit = (e) => {
+		this.setState({isOpen: false})
 		const url = 'http://localhost:3000/api/v1/notes'
 		const token = Cookies.get('token')
 		const data = {note: {
@@ -30,6 +34,7 @@ class SideMenu extends Component {
 			},
 			body: JSON.stringify(data)
 		}
+		this.setState({title: ''})
 		fetch(url, fetchParams)
 			.then(() => this.props.fetchUser())
 	}
@@ -40,6 +45,9 @@ class SideMenu extends Component {
 		return (
 			<Menu fluid secondary icon='labeled' vertical>
 				<Popup
+					on='click'
+					position='top right'
+					open={this.state.isOpen}
 					trigger={
 						<Menu.Item 
 							name='new-note' 
@@ -57,13 +65,10 @@ class SideMenu extends Component {
 							</Form.Group>
 						</Form>
 					}
-					on='click'
-					position='top right'
 				/>
-
 				<Menu.Item
 					name='notes'
-					onClick={this.handleItemClick}
+					// onClick={this.handleItemClick}
 				>
 					<Icon name='sticky note' />
 					Notes
@@ -71,7 +76,7 @@ class SideMenu extends Component {
 
 				<Menu.Item
 					name='tags'
-					onClick={this.handleItemClick}
+					// onClick={this.handleItemClick}
 				>
 					<Icon name='tags' />
 					Tags
