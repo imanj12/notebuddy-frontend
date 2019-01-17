@@ -21,23 +21,19 @@ class MainInterface extends Component {
       this.setState({activeNote: noteId})
    }
 
-   renderAllTags = () => {
+   provideAllTags = () => {
       let options = []
       this.props.user.tags.forEach(tag => options.push({ key: `${tag.id}`, text: `${tag.name}`, value: `${tag.name}` }))
       return options
    }
 
-   renderAssignedTags = () => {
+   provideAssignedTags = () => {
       let options = []
       // eslint-disable-next-line
       let note = this.props.user.notes.find(note => note.id == this.state.activeNote)
       note.tags.forEach(tag => options.push(`${tag.name}`))
       return options
    }
-
-   // setCreatedTagIds = (newTagIdsArr) => {
-   //    this.setState({createdTagIds: newTagIdsArr})
-   // }
 
    setCreatedTagIds = (tag) => {
       this.setState({createdTagIds: [...this.state.createdTagIds, { name: tag.name, id: tag.id }]})
@@ -67,7 +63,6 @@ class MainInterface extends Component {
          content: content,
          note_tags_attributes: note_tags_attributes
       }}
-      console.log(data)
       const fetchParams = {
          method: 'PUT',
          headers: {
@@ -79,7 +74,6 @@ class MainInterface extends Component {
       fetch(url, fetchParams)
          .then(r => r.json())
          .then(data => {
-            console.log(data)
             this.props.fetchUser()
          })
    }
@@ -109,8 +103,8 @@ class MainInterface extends Component {
                         user={this.props.user}
                         // eslint-disable-next-line
                         note={this.props.user.notes.find(note => note.id == this.state.activeNote)}
-                        allTags={this.renderAllTags()}
-                        assignedTags={this.renderAssignedTags()}
+                        allTags={this.provideAllTags()}
+                        assignedTags={this.provideAssignedTags()}
                         setCreatedTagIds={this.setCreatedTagIds}
                         // setExistingTagIds={this.setExistingTagIds}
                         setCurrentValues={this.setCurrentValues}
