@@ -7,8 +7,7 @@ class TagSelector extends Component {
       super(props)
       this.state = { 
          options: props.allTags,
-         currentValues: props.assignedTags,
-         createdTagIds: []
+         currentValues: props.assignedTags      
       }
       props.setCurrentValues(this.state.currentValues)
    }
@@ -34,11 +33,7 @@ class TagSelector extends Component {
       }
       fetch(url, fetchParams)
          .then(r => r.json())
-         .then(data => {
-            this.setState({
-               createdTagIds: [...this.state.createdTagIds, {id: data.id, name: data.name}]
-            }, () => this.props.setCreatedTagIds(this.state.createdTagIds))
-         })
+         .then(data => this.props.setCreatedTagIds(data))
    }
 
    handleChange = (e, { value }) => {

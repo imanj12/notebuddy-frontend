@@ -1,7 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import ReactQuill from 'react-quill'
-import {Header, Segment, Button, Icon, Input} from 'semantic-ui-react'
-const Cookies = require('cookies-js')
+import {Segment, Button, Icon, Input} from 'semantic-ui-react'
 
 class Editor extends Component {
    constructor(props) {
@@ -23,32 +22,6 @@ class Editor extends Component {
    handleNoteSubmit = () => {
       this.props.saveNote(this.state.title, this.state.content)
    }
-
-   // saveNote = () => {
-   //    const url = `http://localhost:3000/api/v1/notes/${this.props.note.id}`
-   //    const token = Cookies.get('token')
-   //    const data = {note: {
-   //       title: this.state.title,
-   //       user_id: this.props.userId,
-   //       content: this.state.text
-   //       //note_tags_attributes: [
-   //          //{tag_id: }
-   //       //]
-   //    }}
-   //    const fetchParams = {
-   //       method: 'PUT',
-   //       headers: {
-   //          'Content-Type':'application/json',
-   //          'Authorization':`Bearer ${token}`
-   //       },
-   //       body: JSON.stringify(data)
-   //    }
-   //    fetch(url, fetchParams)
-   //       .then(r => r.json())
-   //       .then(data => {
-   //          this.props.fetchUser()
-   //       })
-   // }
 
    render() {
       return ( 

@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import {Segment, Menu} from 'semantic-ui-react'
+import { Menu} from 'semantic-ui-react'
 import NoteItem from '../components/NoteItem'
 
 class NotesContainer extends Component {

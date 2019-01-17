@@ -29,13 +29,18 @@ class MainInterface extends Component {
 
    renderAssignedTags = () => {
       let options = []
+      // eslint-disable-next-line
       let note = this.props.user.notes.find(note => note.id == this.state.activeNote)
       note.tags.forEach(tag => options.push(`${tag.name}`))
       return options
    }
 
-   setCreatedTagIds = (newTagIdsArr) => {
-      this.setState({createdTagIds: newTagIdsArr})
+   // setCreatedTagIds = (newTagIdsArr) => {
+   //    this.setState({createdTagIds: newTagIdsArr})
+   // }
+
+   setCreatedTagIds = (tag) => {
+      this.setState({createdTagIds: [...this.state.createdTagIds, { name: tag.name, id: tag.id }]})
    }
 
    setCurrentValues = (valuesArr) => {
@@ -93,6 +98,7 @@ class MainInterface extends Component {
                   <Fragment key={this.state.activeNote}>
                      <Editor 
                         // key={this.state.activeNote} 
+                        // eslint-disable-next-line
                         note={this.props.user.notes.find(note => note.id == this.state.activeNote)}
                         userId={this.props.user.id}
                         fetchUser={this.props.fetchUser}
@@ -101,6 +107,7 @@ class MainInterface extends Component {
                      <TagSelector 
                         // key={this.state.activeNote}
                         user={this.props.user}
+                        // eslint-disable-next-line
                         note={this.props.user.notes.find(note => note.id == this.state.activeNote)}
                         allTags={this.renderAllTags()}
                         assignedTags={this.renderAssignedTags()}
