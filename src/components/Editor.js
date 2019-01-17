@@ -20,6 +20,10 @@ class Editor extends Component {
       this.setState({...this.state, title: e.target.value})
    }
 
+   handleNoteSubmit = () => {
+      
+   }
+
    saveNote = () => {
       const url = `http://localhost:3000/api/v1/notes/${this.props.note.id}`
       const token = Cookies.get('token')
@@ -27,6 +31,9 @@ class Editor extends Component {
          title: this.state.title,
          user_id: this.props.userId,
          content: this.state.text
+         //note_tags_attributes: [
+            //{tag_id: }
+         //]
       }}
       const fetchParams = {
          method: 'PUT',
@@ -39,7 +46,6 @@ class Editor extends Component {
       fetch(url, fetchParams)
          .then(r => r.json())
          .then(data => {
-            console.log(data)
             this.props.fetchUser()
          })
    }
