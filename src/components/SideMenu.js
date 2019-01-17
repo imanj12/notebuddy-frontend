@@ -13,8 +13,8 @@ class SideMenu extends Component {
 	}
 
 	handleItemClick = (e, { name }) => {
-		// this.setState({})
-		this.setState({isOpen: !this.state.isOpen})
+		name === 'new-note' && this.setState({isOpen: !this.state.isOpen})
+		
 	}
 
 	handleSubmit = (e) => {

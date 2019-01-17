@@ -5,12 +5,16 @@ import 'react-quill/dist/quill.snow.css'
 import Welcome from './container/Welcome'
 import MainInterface from './container/MainInterface'
 import NavBar from './components/NavBar'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 const Cookies = require('cookies-js')
 
 class App extends Component {
    state = {
       user: null  // change this back to null
+   }
+
+   componentDidMount = () => {
+      Cookies.get('token') && this.fetchUser()
    }
 
    setUser = (user) => {
@@ -36,22 +40,16 @@ class App extends Component {
       return (
          <div className='app-container' style={{ height: '100%' }}>
             <BrowserRouter>
-               <Fragment>
-                     <NavBar setUser={this.setUser} user={this.state.user}/>
+               <>
+                  <NavBar setUser={this.setUser} user={this.state.user}/>
                   <Switch>
                      {this.state.user ? (
-                        // routes below for if a user exists/is logged in
-                        <Fragment>
-                           <Route path='/home' render={() => <MainInterface user={this.state.user} fetchUser={this.fetchUser}/>} />
-                        </Fragment>
-                     ) : (
-                        // routes below for if no user exists/is not logged in
-                        <Fragment>
-                           <Route path='/' render={() => <Welcome setUser={this.setUser}/>} />    
-                        </Fragment>           
-                     )}  
+                        <Route path='/home' render={() => <MainInterface user={this.state.user} fetchUser={this.fetchUser}/>}/> 
+                        ) : null
+                     }
+                     <Route path='/' render={() => this.state.user ? <Redirect to='/home'/> : <Welcome setUser={this.setUser}/>} /> 
                   </Switch>
-               </Fragment>
+               </>
             </BrowserRouter>
          </div>
       )

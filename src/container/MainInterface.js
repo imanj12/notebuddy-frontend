@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {Grid, Header} from 'semantic-ui-react'
+import {withRouter} from 'react-router-dom'
 import SideMenu from '../components/SideMenu'
 import NotesContainer from './NotesContainer'
 import Editor from '../components/Editor'
@@ -15,7 +16,12 @@ class MainInterface extends Component {
          createdTagIds: [],
          currentValues: []
       }
+      props.fetchUser()
    }
+
+   // componentDidMount = () => {
+   //    Cookies.get('token') ? this.fetchUser() : this.props.history.push('/')
+   // }
 
    setActiveNote = (noteId) => {
       this.setState({activeNote: noteId})
@@ -120,4 +126,4 @@ class MainInterface extends Component {
    }
 }
 
-export default MainInterface
+export default withRouter(MainInterface)
