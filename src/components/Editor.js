@@ -7,13 +7,13 @@ class Editor extends Component {
    constructor(props) {
       super(props)
       this.state = { 
-         text: props.note.content, 
+         content: props.note.content, 
          title: props.note.title 
       }
    }
 
    handleQuillChange = (value) => {
-      this.setState({...this.state, text: value })
+      this.setState({...this.state, content: value })
    }
 
    handleTitleChange = (e) => {
@@ -21,40 +21,40 @@ class Editor extends Component {
    }
 
    handleNoteSubmit = () => {
-      
+      this.props.saveNote(this.state.title, this.state.content)
    }
 
-   saveNote = () => {
-      const url = `http://localhost:3000/api/v1/notes/${this.props.note.id}`
-      const token = Cookies.get('token')
-      const data = {note: {
-         title: this.state.title,
-         user_id: this.props.userId,
-         content: this.state.text
-         //note_tags_attributes: [
-            //{tag_id: }
-         //]
-      }}
-      const fetchParams = {
-         method: 'PUT',
-         headers: {
-            'Content-Type':'application/json',
-            'Authorization':`Bearer ${token}`
-         },
-         body: JSON.stringify(data)
-      }
-      fetch(url, fetchParams)
-         .then(r => r.json())
-         .then(data => {
-            this.props.fetchUser()
-         })
-   }
+   // saveNote = () => {
+   //    const url = `http://localhost:3000/api/v1/notes/${this.props.note.id}`
+   //    const token = Cookies.get('token')
+   //    const data = {note: {
+   //       title: this.state.title,
+   //       user_id: this.props.userId,
+   //       content: this.state.text
+   //       //note_tags_attributes: [
+   //          //{tag_id: }
+   //       //]
+   //    }}
+   //    const fetchParams = {
+   //       method: 'PUT',
+   //       headers: {
+   //          'Content-Type':'application/json',
+   //          'Authorization':`Bearer ${token}`
+   //       },
+   //       body: JSON.stringify(data)
+   //    }
+   //    fetch(url, fetchParams)
+   //       .then(r => r.json())
+   //       .then(data => {
+   //          this.props.fetchUser()
+   //       })
+   // }
 
    render() {
       return ( 
          <Fragment>
             <Segment basic>
-               <Button circular icon color='teal' onClick={this.saveNote}><Icon name='save'/></Button>
+               <Button circular icon color='teal' onClick={this.handleNoteSubmit}><Icon name='save'/></Button>
             </Segment>
             <Segment basic>
                <Input size='huge' value={this.state.title} onChange={this.handleTitleChange}></Input>
@@ -62,7 +62,7 @@ class Editor extends Component {
             </Segment>
             <Segment basic>
                <ReactQuill 
-                  value={this.state.text}
+                  value={this.state.content}
                   onChange={this.handleQuillChange}
                />
             </Segment>

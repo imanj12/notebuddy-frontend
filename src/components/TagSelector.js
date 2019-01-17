@@ -10,6 +10,7 @@ class TagSelector extends Component {
          currentValues: props.assignedTags,
          createdTagIds: []
       }
+      props.setCurrentValues(this.state.currentValues)
    }
    
    handleAddition = (e, { value }) => {
@@ -22,7 +23,6 @@ class TagSelector extends Component {
    createTagFetch = (tagName) => {
       const url = 'http://localhost:3000/api/v1/tags'
       const data = {tag: {name: tagName, user_id: this.props.user.id}}
-      console.log(data)
       const token = Cookies.get('token')
       const fetchParams = {
          method: "POST",
@@ -34,13 +34,22 @@ class TagSelector extends Component {
       }
       fetch(url, fetchParams)
          .then(r => r.json())
-         .then(data => this.state.createdTagIds.push(data.id))
+         .then(data => {
+            this.setState({
+               createdTagIds: [...this.state.createdTagIds, {id: data.id, name: data.name}]
+            }, () => this.props.setCreatedTagIds(this.state.createdTagIds))
+         })
    }
 
-   handleChange = (e, { value }) => this.setState({ currentValues: value })
+   handleChange = (e, { value }) => {
+      this.setState({ 
+         currentValues: value 
+      }, () => {
+         this.props.setCurrentValues(this.state.currentValues)
+      })
+   }
 
    render() {
-
       return (
          <Segment basic>
             <Dropdown 

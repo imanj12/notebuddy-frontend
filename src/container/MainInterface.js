@@ -5,10 +5,16 @@ import NotesContainer from './NotesContainer'
 import Editor from '../components/Editor'
 import TagsBar from '../components/TagsBar'
 import TagSelector from '../components/TagSelector'
+const Cookies = require('cookies-js')
 
 class MainInterface extends Component {
-   state = {
-      activeNote: null
+   constructor(props) {
+      super(props)
+      this.state = {
+         activeNote: null,
+         createdTagIds: [],
+         currentValues: []
+      }
    }
 
    setActiveNote = (noteId) => {
@@ -28,6 +34,51 @@ class MainInterface extends Component {
       return options
    }
 
+   setCreatedTagIds = (newTagIdsArr) => {
+      this.setState({createdTagIds: newTagIdsArr})
+   }
+
+   setCurrentValues = (valuesArr) => {
+      this.setState({currentValues: valuesArr})
+   }
+
+   saveNote = (title, content) => {
+      const url = `http://localhost:3000/api/v1/notes/${this.state.activeNote}`
+      const token = Cookies.get('token')
+      const note_tags_attributes = []
+      this.props.user.tags.forEach(tag => {
+         if (this.state.currentValues.includes(tag.name)) {
+            note_tags_attributes.push({tag_id: tag.id})
+         }
+      })
+      this.state.createdTagIds.forEach(tag => {
+         if (this.state.currentValues.includes(tag.name)) {
+            note_tags_attributes.push({tag_id: tag.id})
+         }
+      })
+      const data = {note: {
+         title: title,
+         user_id: this.props.user.id,
+         content: content,
+         note_tags_attributes: note_tags_attributes
+      }}
+      console.log(data)
+      const fetchParams = {
+         method: 'PUT',
+         headers: {
+            'Content-Type':'application/json',
+            'Authorization':`Bearer ${token}`
+         },
+         body: JSON.stringify(data)
+      }
+      fetch(url, fetchParams)
+         .then(r => r.json())
+         .then(data => {
+            console.log(data)
+            this.props.fetchUser()
+         })
+   }
+
    render() {
       return (
          <Grid columns={3}>
@@ -45,6 +96,7 @@ class MainInterface extends Component {
                         note={this.props.user.notes.find(note => note.id == this.state.activeNote)}
                         userId={this.props.user.id}
                         fetchUser={this.props.fetchUser}
+                        saveNote={this.saveNote}
                         />
                      <TagSelector 
                         // key={this.state.activeNote}
@@ -52,6 +104,9 @@ class MainInterface extends Component {
                         note={this.props.user.notes.find(note => note.id == this.state.activeNote)}
                         allTags={this.renderAllTags()}
                         assignedTags={this.renderAssignedTags()}
+                        setCreatedTagIds={this.setCreatedTagIds}
+                        // setExistingTagIds={this.setExistingTagIds}
+                        setCurrentValues={this.setCurrentValues}
                      />
                   </Fragment>
                ) : (
