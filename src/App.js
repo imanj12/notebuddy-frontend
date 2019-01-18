@@ -10,15 +10,12 @@ const Cookies = require('cookies-js')
 
 class App extends Component {
    state = {
-      user: null  // change this back to null
+      user: null
    }
 
    componentDidMount = () => {
+      // check for previously logged in user and then fetch their data
       Cookies.get('token') && this.fetchUser()
-   }
-
-   setUser = (user) => {
-      this.setState({user: user})
    }
 
    fetchUser = () => {
@@ -34,6 +31,10 @@ class App extends Component {
       fetch(url, fetchParams)
          .then(r => r.json())
          .then(data => this.setUser(data.user))
+   }
+
+   setUser = (user) => {
+      this.setState({user: user})
    }
    
    render() {

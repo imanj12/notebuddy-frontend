@@ -14,7 +14,7 @@ class NotesContainer extends Component {
       return (
          <Fragment>
             <Menu vertical fluid pointing borderless size='massive'>
-               {this.props.user.notes.map(note => (
+               {this.props.notes.map(note => (
                   <NoteItem 
                      key={note.id} 
                      note={note} 

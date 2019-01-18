@@ -4,7 +4,8 @@ const Cookies = require('cookies-js')
 
 class SideMenu extends Component {
 	state = { 
-		isOpen: false,
+		newNoteIsOpen: false,
+		tagsIsOpen: false,
 		title: ''
 	}
 
@@ -13,12 +14,12 @@ class SideMenu extends Component {
 	}
 
 	handleItemClick = (e, { name }) => {
-		name === 'new-note' && this.setState({isOpen: !this.state.isOpen})
-		
+		name === 'new-note' && this.setState({newNoteIsOpen: !this.state.newNoteIsOpen})
+		name === 'tags' && this.setState({tagsIsOpen: !this.state.tagsIsOpen})
 	}
 
 	handleSubmit = (e) => {
-		this.setState({isOpen: false})
+		this.setState({newNoteIsOpen: false})
 		const url = 'http://localhost:3000/api/v1/notes'
 		const token = Cookies.get('token')
 		const data = {note: {
@@ -47,7 +48,7 @@ class SideMenu extends Component {
 				<Popup
 					on='click'
 					position='top right'
-					open={this.state.isOpen}
+					open={this.state.newNoteIsOpen}
 					trigger={
 						<Menu.Item 
 							name='new-note' 
@@ -73,14 +74,24 @@ class SideMenu extends Component {
 					<Icon name='sticky note' />
 					Notes
 				</Menu.Item>
-
-				<Menu.Item
-					name='tags'
-					// onClick={this.handleItemClick}
-				>
-					<Icon name='tags' />
-					Tags
-				</Menu.Item>
+				
+				<Popup
+					on='click'
+					position='top right'
+					open={this.state.tagsIsOpen}
+					trigger={
+						<Menu.Item
+							name='tags'
+							onClick={this.handleItemClick}
+						>
+							<Icon name='tags' />
+							Tags
+						</Menu.Item>
+					}
+					content={
+						'Content here all the time'
+					}
+				/>
 			</Menu>
 		)
    }
