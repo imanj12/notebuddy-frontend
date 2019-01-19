@@ -8,18 +8,18 @@ class SideMenu extends Component {
 	state = { 
 		newNoteIsOpen: false,
 		tagsIsOpen: false,
-		title: '',
+		newNoteValue: '',
 		tagSearchValue: ''
 	}
 
 	// handle new note input
 	handleChange = (e) => {
-		this.setState({[e.target.name]: e.target.value})
+		this.setState({newNoteValue: e.target.value})
 	}
 
 	// handle opening and closing of popups on icon click
 	handleItemClick = (e, { name }) => {
-		name === 'new-note' && this.setState({newNoteIsOpen: !this.state.newNoteIsOpen, title: ''})
+		name === 'new-note' && this.setState({newNoteIsOpen: !this.state.newNoteIsOpen, newNoteValue: ''})
 		name === 'tags' && this.setState({tagsIsOpen: !this.state.tagsIsOpen, tagSearchValue: ''})
 	}
 
@@ -29,7 +29,7 @@ class SideMenu extends Component {
 		const url = 'http://localhost:3000/api/v1/notes'
 		const token = Cookies.get('token')
 		const data = {note: {
-			title: this.state.title,
+			title: this.state.newNoteValue,
 			user_id: this.props.user.id,
 			content: ''
 		}}
@@ -41,7 +41,7 @@ class SideMenu extends Component {
 			},
 			body: JSON.stringify(data)
 		}
-		this.setState({title: ''})
+		this.setState({newNoteValue: ''})
 		fetch(url, fetchParams)
 			.then(() => this.props.fetchUser())
 	}
@@ -82,7 +82,7 @@ class SideMenu extends Component {
 					content={
 						<Form onSubmit={this.handleSubmit}>
 							<Form.Group>
-								<Form.Input name='title' value={this.state.title} placeholder='Title' onChange={this.handleChange} />
+								<Form.Input name='newNoteValue' value={this.state.newNoteValue} placeholder='Title' onChange={this.handleChange} />
 								<Form.Button icon><Icon name='add' /></Form.Button>
 							</Form.Group>
 						</Form>
