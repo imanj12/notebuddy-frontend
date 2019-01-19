@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
 import 'react-quill/dist/quill.snow.css'
@@ -9,16 +9,16 @@ import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 const Cookies = require('cookies-js')
 
 class App extends Component {
-   state = {
-      user: null
-   }
-
-   componentDidMount = () => {
-      // check for previously logged in user and then fetch their data
+   constructor() {
+      super()
+      this.state = {
+         user: null
+      }
       Cookies.get('token') && this.fetchUser()
    }
 
    fetchUser = () => {
+      console.log('fetchUser called')
       const url = 'http://localhost:3000/api/v1/profile'
       const token = Cookies.get('token')
       const fetchParams = {

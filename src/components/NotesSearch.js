@@ -1,21 +1,18 @@
-import React, {Component} from 'react'
-import {Input, Segment} from 'semantic-ui-react'
+import React from 'react'
+import {Input} from 'semantic-ui-react'
 
-class NotesSearch extends Component {
-
-   render() {
+const NotesSearch = (props) => {
       return (
          <Input
             fluid
-            error={false} // make this dynamic
+            error={false} // make this dynamic when no notes found in search
             placeholder="Search notes..."
-            onChange={this.props.onNotesSearchChange}
-            value={this.props.notesSearch}
+            onChange={props.onNotesSearchChange}
+            value={props.notesSearch}
          >
             <input style={{borderRadius: '25px'}}/>
          </Input>
       )
-   }
 }
 
 export default NotesSearch

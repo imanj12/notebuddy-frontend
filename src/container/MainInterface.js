@@ -4,7 +4,6 @@ import {withRouter} from 'react-router-dom'
 import SideMenu from '../components/SideMenu'
 import NotesContainer from './NotesContainer'
 import Editor from '../components/Editor'
-import TagsBar from '../components/TagsBar'
 import TagSelector from '../components/TagSelector'
 import NotesSearch from '../components/NotesSearch'
 const Cookies = require('cookies-js')
@@ -14,7 +13,6 @@ class MainInterface extends Component {
       super(props)
       this.state = {
          activeNote: null,
-         createdTagIds: [],
          currentValues: [],
          notesSearch: '',
          notesSearchEmpty: false
@@ -40,10 +38,6 @@ class MainInterface extends Component {
       return options
    }
 
-   setCreatedTagIds = (tag) => {
-      this.setState({createdTagIds: [...this.state.createdTagIds, { name: tag.name, id: tag.id }]})
-   }
-
    setCurrentValues = (valuesArr) => {
       this.setState({currentValues: valuesArr})
    }
@@ -53,11 +47,6 @@ class MainInterface extends Component {
       const token = Cookies.get('token')
       const note_tags_attributes = []
       this.props.user.tags.forEach(tag => {
-         if (this.state.currentValues.includes(tag.name)) {
-            note_tags_attributes.push({tag_id: tag.id})
-         }
-      })
-      this.state.createdTagIds.forEach(tag => {
          if (this.state.currentValues.includes(tag.name)) {
             note_tags_attributes.push({tag_id: tag.id})
          }
@@ -76,9 +65,13 @@ class MainInterface extends Component {
          },
          body: JSON.stringify(data)
       }
+      // console.log('pre-fetch:')
+      // console.log(data)
       fetch(url, fetchParams)
          .then(r => r.json())
          .then(data => {
+            // console.log('post-fetch:')
+            // console.log(data)
             this.props.fetchUser()
          })
    }
@@ -125,20 +118,19 @@ class MainInterface extends Component {
                         fetchUser={this.props.fetchUser}
                         saveNote={this.saveNote}
                         />
-                     <TagSelector 
-                        user={this.props.user}
-                        // eslint-disable-next-line
-                        note={this.props.user.notes.find(note => note.id == this.state.activeNote)}
-                        allTags={this.provideAllTags()}
-                        assignedTags={this.provideAssignedTags()}
-                        setCreatedTagIds={this.setCreatedTagIds}
-                        setCurrentValues={this.setCurrentValues}
-                     />
+                        <TagSelector 
+                           user={this.props.user}
+                           // eslint-disable-next-line
+                           note={this.props.user.notes.find(note => note.id == this.state.activeNote)}
+                           allTags={this.provideAllTags()}
+                           assignedTags={this.provideAssignedTags()}
+                           setCurrentValues={this.setCurrentValues}
+                           fetchUser={this.props.fetchUser}
+                        />
                   </Fragment>
                ) : (
                   <Header as='h1' textAlign='center'>Select a note, or create a new one!</Header>
                )}
-               <TagsBar />
             </Grid.Column>
          </Grid>
       )

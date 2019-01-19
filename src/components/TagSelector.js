@@ -33,7 +33,12 @@ class TagSelector extends Component {
       }
       fetch(url, fetchParams)
          .then(r => r.json())
-         .then(data => this.props.setCreatedTagIds(data))
+         .then(data => {
+            console.log('new tag:')
+            console.log(data)
+            this.props.fetchUser()
+            // this.props.setCreatedTagIds(data)
+         })
    }
 
    handleChange = (e, { value }) => {
