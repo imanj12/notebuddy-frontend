@@ -1,23 +1,29 @@
 import React, {Component} from 'react'
 import { Menu, Icon, Popup, Form } from 'semantic-ui-react'
+import SideMenuTagsContainer from '../container/SideMenuTagsContainer'
+import TagsSearch from './TagsSearch'
 const Cookies = require('cookies-js')
 
 class SideMenu extends Component {
 	state = { 
 		newNoteIsOpen: false,
 		tagsIsOpen: false,
-		title: ''
+		title: '',
+		tagSearchValue: ''
 	}
 
+	// handle new note input
 	handleChange = (e) => {
 		this.setState({[e.target.name]: e.target.value})
 	}
 
+	// handle opening and closing of popups on icon click
 	handleItemClick = (e, { name }) => {
-		name === 'new-note' && this.setState({newNoteIsOpen: !this.state.newNoteIsOpen})
-		name === 'tags' && this.setState({tagsIsOpen: !this.state.tagsIsOpen})
+		name === 'new-note' && this.setState({newNoteIsOpen: !this.state.newNoteIsOpen, title: ''})
+		name === 'tags' && this.setState({tagsIsOpen: !this.state.tagsIsOpen, tagSearchValue: ''})
 	}
 
+	// handle new note submit (closes popup and posts to /notes)
 	handleSubmit = (e) => {
 		this.setState({newNoteIsOpen: false})
 		const url = 'http://localhost:3000/api/v1/notes'
@@ -40,9 +46,24 @@ class SideMenu extends Component {
 			.then(() => this.props.fetchUser())
 	}
 
+	// provide all user's tags to SideMenuTagsContainer.js
+	provideTags = () => {
+		return this.props.user.tags.filter(tag => tag.name.includes(this.state.tagSearchValue))
+	}
+
+	// close popup on tag click and provide tag name to state.activeTag in MainInterface.js
+	handleTagClick = (e) => {
+		this.setState({tagsIsOpen: !this.state.tagsIsOpen})
+		this.setState({tagSearchValue: ''})
+		this.props.handleTagClick(e.target.name)
+	}
+
+	onTagSearchChange = (e, data) => {
+		this.setState({tagSearchValue: data.value})
+	}
+
 	render() {
 		// const { activeItem } = this.state
-
 		return (
 			<Menu fluid secondary icon='labeled' vertical>
 				<Popup
@@ -78,6 +99,7 @@ class SideMenu extends Component {
 				<Popup
 					on='click'
 					position='top right'
+					wide
 					open={this.state.tagsIsOpen}
 					trigger={
 						<Menu.Item
@@ -89,7 +111,15 @@ class SideMenu extends Component {
 						</Menu.Item>
 					}
 					content={
-						'Content here all the time'
+						<>
+							<TagsSearch 
+								tagSearchValue={this.state.tagSearchValue}
+								onTagSearchChange={this.onTagSearchChange}	
+								/>
+							<SideMenuTagsContainer 
+								tags={this.provideTags()} 
+								handleTagClick={this.handleTagClick}/>
+						</>
 					}
 				/>
 			</Menu>

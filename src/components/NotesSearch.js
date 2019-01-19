@@ -6,7 +6,7 @@ const NotesSearch = (props) => {
          <Input
             fluid
             error={false} // make this dynamic when no notes found in search
-            placeholder="Search notes..."
+            placeholder={props.activeTag ? `Search ${props.activeTag}...` : "Search notes..."}
             onChange={props.onNotesSearchChange}
             value={props.notesSearch}
          >

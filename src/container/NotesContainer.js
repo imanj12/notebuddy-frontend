@@ -5,6 +5,8 @@ import NoteItem from '../components/NoteItem'
 class NotesContainer extends Component {
    state = { activeItem: '' }
 
+   // sets activeItem property of note when clicked (i.e. gets highlighted and points right)
+   // and provides name of active note to state.activeNote in MainInterface.js
    handleItemClick = (e, { name }) => {
       this.setState({ activeItem: name })
       this.props.setActiveNote(name)

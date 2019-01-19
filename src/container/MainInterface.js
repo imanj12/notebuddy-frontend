@@ -15,21 +15,25 @@ class MainInterface extends Component {
          activeNote: null,
          currentValues: [],
          notesSearch: '',
-         notesSearchEmpty: false
+         notesSearchEmpty: false,
+         activeTag: null
       }
-      props.fetchUser()
+      // props.fetchUser()
    }
 
+   // determine which note the editor is displaying (props for Editor)
    setActiveNote = (noteId) => {
       this.setState({activeNote: noteId})
    }
 
+   // provide all users tags to select from in input box in TagSelector
    provideAllTags = () => {
       let options = []
       this.props.user.tags.forEach(tag => options.push({ key: `${tag.id}`, text: `${tag.name}`, value: `${tag.name}` }))
       return options
    }
 
+   // provide current tags of note from state.activeNote to TagSelector
    provideAssignedTags = () => {
       let options = []
       // eslint-disable-next-line
@@ -38,6 +42,7 @@ class MainInterface extends Component {
       return options
    }
 
+   // receive values of tags selected in TagSelector (props for TagSelector)
    setCurrentValues = (valuesArr) => {
       this.setState({currentValues: valuesArr})
    }
@@ -76,16 +81,26 @@ class MainInterface extends Component {
          })
    }
 
+   handleTagClick = (tagName) => {
+      console.log(tagName)
+      this.setState({activeTag: tagName})
+	}
+
    notesContainerFilter = () => {
-      let filter = this.props.user.notes.filter(note => (
-         note.title.toLowerCase().includes(this.state.notesSearch) || note.content.includes(this.state.notesSearch)
-      ))
-      // if (filter.length === 0) {
-      //    this.setState({notesSearchEmpty: true})
-      // } else {
-      //    this.setState({notesSearchEmpty: false})
-      // }
-      return filter
+      if (this.state.activeTag) {
+         return this.props.user.tags.find(tag => tag.name == this.state.activeTag)
+            .notes
+            .filter(note => (         
+               note.title.toLowerCase().includes(this.state.notesSearch) || note.content.includes(this.state.notesSearch)
+            ))
+      } else {
+         return this.props.user.notes.filter(note => (         
+            note.title.toLowerCase().includes(this.state.notesSearch) || note.content.includes(this.state.notesSearch)
+         ))
+      }
+      // this.props.user.notes.filter(note => (         
+      //    note.title.toLowerCase().includes(this.state.notesSearch) || note.content.includes(this.state.notesSearch)
+      // ))
    }
 
    onNotesSearchChange = (e, data) => {
@@ -96,18 +111,27 @@ class MainInterface extends Component {
       return (
          <Grid columns={3}>
             
-            {/* 1. side menu */}
+            {/* column 1: side menu */}
             <Grid.Column width={1}>
-               <SideMenu user={this.props.user} fetchUser={this.props.fetchUser} setActiveNote={this.setActiveNote} />
+               <SideMenu 
+                  user={this.props.user} 
+                  fetchUser={this.props.fetchUser} 
+                  setActiveNote={this.setActiveNote} 
+                  handleTagClick={this.handleTagClick}/>
             </Grid.Column>
             
-            {/* 2. search and notes container */}
+            {/* column 2: search and notes container */}
             <Grid.Column width={3}>
-               <NotesSearch onNotesSearchChange={this.onNotesSearchChange} notesSearch={this.state.notesSearch} searchEmpty={this.state.notesSearchEmpty} />
+               <NotesSearch 
+                  onNotesSearchChange={this.onNotesSearchChange} 
+                  notesSearch={this.state.notesSearch} 
+                  searchEmpty={this.state.notesSearchEmpty} 
+                  activeTag={this.state.activeTag}
+               />
                <NotesContainer notes={this.notesContainerFilter()} setActiveNote={this.setActiveNote}/>
             </Grid.Column>
             
-            {/* 3. editor and tags */}
+            {/* column 3: editor and tags */}
             <Grid.Column width={12}>
                {this.state.activeNote ? (
                   <Fragment key={this.state.activeNote}>
