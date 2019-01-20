@@ -16,9 +16,16 @@ class MainInterface extends Component {
          currentValues: [],
          notesSearch: '',
          notesSearchEmpty: false,
-         activeTag: null
+         activeTag: null,
+         createdTags: []
       }
       // props.fetchUser()
+   }
+
+   addToCreatedTags = (tagObj) => {
+      this.setState({
+         createdTags: [...this.state.createdTags, {id: tagObj.tag_id, name: tagObj.tag_name}]
+      })
    }
 
    // determine which note the editor is displaying (props for Editor)
@@ -51,9 +58,18 @@ class MainInterface extends Component {
       const url = `http://localhost:3000/api/v1/notes/${this.state.activeNote}`
       const token = Cookies.get('token')
       const note_tags_attributes = []
-      this.props.user.tags.forEach(tag => {
-         if (this.state.currentValues.includes(tag.name)) {
-            note_tags_attributes.push({tag_id: tag.id})
+      // this.props.user.tags.forEach(tag => {
+      //    if (this.state.currentValues.includes(tag.name)) {
+      //       note_tags_attributes.push({tag_id: tag.id})
+      //    }
+      // })
+      this.state.currentValues.forEach(tagName => {
+         const existingTag = this.props.user.tags.find(tag => tag.name === tagName)
+         const createdTag = this.state.createdTags.find(tag => tag.name === tagName)
+         if (!!existingTag) {
+            note_tags_attributes.push({tag_id: existingTag.id})
+         } else if (!!createdTag) {
+            note_tags_attributes.push({tag_id: createdTag.id})
          }
       })
       const data = {note: {
@@ -70,14 +86,36 @@ class MainInterface extends Component {
          },
          body: JSON.stringify(data)
       }
-      // console.log('pre-fetch:')
-      // console.log(data)
+      console.log('pre-fetch:')
+      console.log(data)
       fetch(url, fetchParams)
          .then(r => r.json())
          .then(data => {
-            // console.log('post-fetch:')
-            // console.log(data)
+            console.log('post-fetch:')
+            console.log(data)
             this.props.fetchUser()
+         })
+   }
+
+   createTagFetch = (tagName) => {
+      const url = 'http://localhost:3000/api/v1/tags'
+      const data = {tag: {name: tagName, user_id: this.props.user.id}}
+      const token = Cookies.get('token')
+      const fetchParams = {
+         method: "POST",
+         headers: {
+            "Content-Type":"application/json",
+            "Authorization": `Bearer ${token}`
+         },
+         body: JSON.stringify(data)
+      }
+      fetch(url, fetchParams)
+         .then(r => r.json())
+         .then(data => {
+            console.log('new tag:')
+            console.log(data)
+            return data.id
+            // push to array of {tag_id: id, tag_name: name}
          })
    }
 
@@ -87,6 +125,7 @@ class MainInterface extends Component {
 
    notesContainerFilter = () => {
       if (this.state.activeTag) {
+         // eslint-disable-next-line
          return this.props.user.tags.find(tag => tag.name == this.state.activeTag)
             .notes
             .filter(note => (         
@@ -151,6 +190,7 @@ class MainInterface extends Component {
                            assignedTags={this.provideAssignedTags()}
                            setCurrentValues={this.setCurrentValues}
                            fetchUser={this.props.fetchUser}
+                           addToCreatedTags={this.addToCreatedTags}
                         />
                   </Fragment>
                ) : (

@@ -66,7 +66,7 @@ class SideMenu extends Component {
 	render() {
 		// const { activeItem } = this.state
 		return (
-			<Menu fluid secondary icon='labeled' vertical textAlign='center'>
+			<Menu fluid secondary icon='labeled' vertical>
 				<Popup
 					on='click'
 					position='top right'

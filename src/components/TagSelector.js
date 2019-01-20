@@ -13,10 +13,14 @@ class TagSelector extends Component {
    }
    
    handleAddition = (e, { value }) => {
-      this.setState({
-         options: [{ text: value, value }, ...this.state.options],
-      })
-      this.createTagFetch(value)
+      console.log('addition value')
+      console.log(value)
+      if (!this.state.options.find(option => option.value === value)) {
+         this.setState({
+            options: [...this.state.options, { text: value, value }],
+         })
+         this.createTagFetch(value)
+      }
    }
 
    createTagFetch = (tagName) => {
@@ -36,14 +40,20 @@ class TagSelector extends Component {
          .then(data => {
             console.log('new tag:')
             console.log(data)
-            this.props.fetchUser()
-            // this.props.setCreatedTagIds(data)
+            // this.props.fetchUser()
+            this.props.addToCreatedTags({tag_id: data.id, tag_name: data.name})
+            // push to array of {tag_id: id, tag_name: name}
          })
    }
 
    handleChange = (e, { value }) => {
+      console.log('handle change')
+      if (value.length > 0) {
+         value[value.length - 1] = value[value.length - 1].trim()
+      } 
+      console.log(value)
       this.setState({ 
-         currentValues: value 
+         currentValues: value
       }, () => {
          this.props.setCurrentValues(this.state.currentValues)
       })
