@@ -86,36 +86,14 @@ class MainInterface extends Component {
          },
          body: JSON.stringify(data)
       }
-      console.log('pre-fetch:')
-      console.log(data)
+      // console.log('pre-fetch:')
+      // console.log(data)
       fetch(url, fetchParams)
          .then(r => r.json())
          .then(data => {
-            console.log('post-fetch:')
-            console.log(data)
+            // console.log('post-fetch:')
+            // console.log(data)
             this.props.fetchUser()
-         })
-   }
-
-   createTagFetch = (tagName) => {
-      const url = 'http://localhost:3000/api/v1/tags'
-      const data = {tag: {name: tagName, user_id: this.props.user.id}}
-      const token = Cookies.get('token')
-      const fetchParams = {
-         method: "POST",
-         headers: {
-            "Content-Type":"application/json",
-            "Authorization": `Bearer ${token}`
-         },
-         body: JSON.stringify(data)
-      }
-      fetch(url, fetchParams)
-         .then(r => r.json())
-         .then(data => {
-            console.log('new tag:')
-            console.log(data)
-            return data.id
-            // push to array of {tag_id: id, tag_name: name}
          })
    }
 

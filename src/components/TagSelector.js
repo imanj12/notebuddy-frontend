@@ -13,7 +13,8 @@ class TagSelector extends Component {
    }
    
    handleAddition = (e, { value }) => {
-      console.log('addition value')
+      console.log('handle addition value:')
+      value = value.trim()
       console.log(value)
       if (!this.state.options.find(option => option.value === value)) {
          this.setState({
@@ -42,15 +43,14 @@ class TagSelector extends Component {
             console.log(data)
             // this.props.fetchUser()
             this.props.addToCreatedTags({tag_id: data.id, tag_name: data.name})
-            // push to array of {tag_id: id, tag_name: name}
          })
    }
 
    handleChange = (e, { value }) => {
-      console.log('handle change')
       if (value.length > 0) {
          value[value.length - 1] = value[value.length - 1].trim()
       } 
+      console.log('handle change value:')
       console.log(value)
       this.setState({ 
          currentValues: value
