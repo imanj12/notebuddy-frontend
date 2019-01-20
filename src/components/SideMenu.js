@@ -21,6 +21,7 @@ class SideMenu extends Component {
 	handleItemClick = (e, { name }) => {
 		name === 'new-note' && this.setState({newNoteIsOpen: !this.state.newNoteIsOpen, newNoteValue: ''})
 		name === 'tags' && this.setState({tagsIsOpen: !this.state.tagsIsOpen, tagSearchValue: ''})
+		name === 'notes' && this.props.setActiveTag(null)
 	}
 
 	// handle new note submit (closes popup and posts to /notes)
@@ -65,7 +66,7 @@ class SideMenu extends Component {
 	render() {
 		// const { activeItem } = this.state
 		return (
-			<Menu fluid secondary icon='labeled' vertical>
+			<Menu fluid secondary icon='labeled' vertical textAlign='center'>
 				<Popup
 					on='click'
 					position='top right'
@@ -90,10 +91,10 @@ class SideMenu extends Component {
 				/>
 				<Menu.Item
 					name='notes'
-					// onClick={this.handleItemClick}
+					onClick={this.handleItemClick}
 				>
 					<Icon name='sticky note' />
-					Notes
+					All Notes
 				</Menu.Item>
 				
 				<Popup

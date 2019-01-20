@@ -81,8 +81,7 @@ class MainInterface extends Component {
          })
    }
 
-   handleTagClick = (tagName) => {
-      console.log(tagName)
+   setActiveTag = (tagName) => {
       this.setState({activeTag: tagName})
 	}
 
@@ -117,7 +116,9 @@ class MainInterface extends Component {
                   user={this.props.user} 
                   fetchUser={this.props.fetchUser} 
                   setActiveNote={this.setActiveNote} 
-                  handleTagClick={this.handleTagClick}/>
+                  handleTagClick={this.setActiveTag}
+                  setActiveTag={this.setActiveTag}
+               />
             </Grid.Column>
             
             {/* column 2: search and notes container */}
