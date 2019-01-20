@@ -30,7 +30,7 @@ class SideMenu extends Component {
 		const url = 'http://localhost:3000/api/v1/notes'
 		const token = Cookies.get('token')
 		const data = {note: {
-			title: this.state.newNoteValue,
+			title: this.state.newNoteValue.trim(),
 			user_id: this.props.user.id,
 			content: ''
 		}}

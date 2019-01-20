@@ -73,7 +73,7 @@ class MainInterface extends Component {
          }
       })
       const data = {note: {
-         title: title,
+         title: title.trim(),
          user_id: this.props.user.id,
          content: content,
          note_tags_attributes: note_tags_attributes
