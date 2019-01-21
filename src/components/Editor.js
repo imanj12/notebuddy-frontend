@@ -23,15 +23,19 @@ class Editor extends Component {
       this.props.saveNote(this.state.title, this.state.content)
    }
 
+   handleNoteDelete = () => {
+      this.props.deleteNote()
+   }
+
    render() {
       return ( 
          <Fragment>
             <Segment basic>
                <Button circular icon color='teal' onClick={this.handleNoteSubmit}><Icon name='save'/></Button>
+               <Button circular icon color='red' onClick={this.handleNoteDelete}><Icon name='delete'/></Button>
             </Segment>
             <Segment basic>
                <Input size='huge' value={this.state.title} onChange={this.handleTitleChange}></Input>
-               {/* <Button circular icon color='red'><Icon name='delete'/></Button> */}
             </Segment>
             <Segment basic>
                <ReactQuill 

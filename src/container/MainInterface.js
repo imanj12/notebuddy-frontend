@@ -97,6 +97,21 @@ class MainInterface extends Component {
          })
    }
 
+   deleteNote = () => {
+      const url = `http://localhost:3000/api/v1/notes/${this.state.activeNote}`
+      const token = Cookies.get('token')
+      const fetchParams = {
+         method: 'DELETE',
+         headers: {
+            "Content-Type":"application/json",
+            "Authorization": `Bearer ${token}`
+         }
+      }
+      fetch(url, fetchParams)
+         .then(() => this.props.fetchUser())
+         .then(() => this.setState({activeNote: null}))   
+   }
+
    setActiveTag = (tagName) => {
       this.setState({activeTag: tagName})
 	}
@@ -159,17 +174,18 @@ class MainInterface extends Component {
                         userId={this.props.user.id}
                         fetchUser={this.props.fetchUser}
                         saveNote={this.saveNote}
+                        deleteNote={this.deleteNote}
                         />
-                        <TagSelector 
-                           user={this.props.user}
-                           // eslint-disable-next-line
-                           note={this.props.user.notes.find(note => note.id == this.state.activeNote)}
-                           allTags={this.provideAllTags()}
-                           assignedTags={this.provideAssignedTags()}
-                           setCurrentValues={this.setCurrentValues}
-                           fetchUser={this.props.fetchUser}
-                           addToCreatedTags={this.addToCreatedTags}
-                        />
+                     <TagSelector 
+                        user={this.props.user}
+                        // eslint-disable-next-line
+                        note={this.props.user.notes.find(note => note.id == this.state.activeNote)}
+                        allTags={this.provideAllTags()}
+                        assignedTags={this.provideAssignedTags()}
+                        setCurrentValues={this.setCurrentValues}
+                        fetchUser={this.props.fetchUser}
+                        addToCreatedTags={this.addToCreatedTags}
+                     />
                   </Fragment>
                ) : (
                   <Header as='h1' textAlign='center'>Select a note, or create a new one!</Header>
