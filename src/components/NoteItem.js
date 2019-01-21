@@ -1,19 +1,30 @@
 import React, {Component} from 'react'
-import { Menu } from 'semantic-ui-react';
+import { Menu, Label } from 'semantic-ui-react'
+const moment = require('moment')
 
-class NoteItem extends Component {
+const NoteItem = (props) => {
    
-   render() {
-      return (
-         <Menu.Item 
-            name={this.props.note.id.toString()}
-            active={this.props.activeItem === this.props.note.id.toString()} 
-            onClick={this.props.handleItemClick}
-         >
-            {this.props.note.title}
-         </Menu.Item>
-      )
+   const convertTime = (datetime) => {
+      let m = moment(datetime)
+      return m.format("M/D/YY - h:mm a")
    }
+
+   return (
+      <Menu.Item 
+         name={props.note.id.toString()}
+         active={props.activeItem === props.note.id.toString()} 
+         onClick={props.handleItemClick}
+      >
+         <Menu.Header>
+            {props.note.title}
+         </Menu.Header>   
+         <Menu.Menu>
+            <Menu.Item>
+            {convertTime(props.note.updated_at)}
+            </Menu.Item>
+         </Menu.Menu>         
+      </Menu.Item>
+   )
 }
 
 export default NoteItem
