@@ -10,7 +10,6 @@ class Editor extends Component {
          content: props.note.content, 
          title: props.note.title
       }
-      console.log(props.note)
    }
 
    modules = {
@@ -65,7 +64,7 @@ class Editor extends Component {
                      <br/>
                      Last updated: {this.convertTime(this.props.note.updated_at)}
                      <br/>
-                     at or around: {this.props.note.location}
+                     near: {this.props.note.location}
                   </p>
                </Container>
             </Segment>

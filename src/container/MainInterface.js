@@ -77,7 +77,6 @@ class MainInterface extends Component {
          location: this.state.currentLocation,
          note_tags_attributes: note_tags_attributes
       }}
-      console.log(data)
       const fetchParams = {
          method: 'PUT',
          headers: {
