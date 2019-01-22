@@ -17,9 +17,9 @@ class MainInterface extends Component {
          notesSearch: '',
          notesSearchEmpty: false,
          activeTag: null,
-         createdTags: []
+         createdTags: [],
+         saving: false
       }
-      // props.fetchUser()
    }
 
    addToCreatedTags = (tagObj) => {
@@ -55,14 +55,10 @@ class MainInterface extends Component {
    }
 
    saveNote = (title, content) => {
+      this.setState({saving: true})
       const url = `http://localhost:3000/api/v1/notes/${this.state.activeNote}`
       const token = Cookies.get('token')
       const note_tags_attributes = []
-      // this.props.user.tags.forEach(tag => {
-      //    if (this.state.currentValues.includes(tag.name)) {
-      //       note_tags_attributes.push({tag_id: tag.id})
-      //    }
-      // })
       this.state.currentValues.forEach(tagName => {
          const existingTag = this.props.user.tags.find(tag => tag.name === tagName)
          const createdTag = this.state.createdTags.find(tag => tag.name === tagName)
@@ -86,14 +82,11 @@ class MainInterface extends Component {
          },
          body: JSON.stringify(data)
       }
-      // console.log('pre-fetch:')
-      // console.log(data)
       fetch(url, fetchParams)
          .then(r => r.json())
          .then(data => {
-            // console.log('post-fetch:')
-            // console.log(data)
             this.props.fetchUser()
+            setInterval(() => this.setState({saving: false}), 1000)
          })
    }
 
@@ -175,6 +168,7 @@ class MainInterface extends Component {
                         fetchUser={this.props.fetchUser}
                         saveNote={this.saveNote}
                         deleteNote={this.deleteNote}
+                        saving={this.state.saving}
                         />
                      <TagSelector 
                         user={this.props.user}

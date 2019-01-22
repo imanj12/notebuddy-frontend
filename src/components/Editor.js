@@ -1,15 +1,17 @@
 import React, {Component, Fragment} from 'react'
 import ReactQuill from 'react-quill'
-import {Segment, Button, Icon, Input} from 'semantic-ui-react'
+import {Segment, Button, Icon, Input, Loader} from 'semantic-ui-react'
 
 class Editor extends Component {
    constructor(props) {
       super(props)
       this.state = { 
          content: props.note.content, 
-         title: props.note.title 
+         title: props.note.title
       }
    }
+
+   
 
    handleQuillChange = (value) => {
       this.setState({...this.state, content: value })
@@ -31,6 +33,7 @@ class Editor extends Component {
       return ( 
          <Fragment>
             <Segment basic>
+               {this.props.saving ? <Loader inline active/> : null}
                <Button circular icon color='teal' onClick={this.handleNoteSubmit}><Icon name='save'/></Button>
                <Button circular icon color='red' onClick={this.handleNoteDelete}><Icon name='delete'/></Button>
             </Segment>
