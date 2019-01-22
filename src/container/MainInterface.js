@@ -15,7 +15,7 @@ class MainInterface extends Component {
          activeNote: null,
          currentValues: [],
          notesSearch: '',
-         notesSearchEmpty: false,
+         // notesSearchEmpty: false,
          activeTag: null,
          createdTags: [],
          saving: false,
@@ -118,7 +118,11 @@ class MainInterface extends Component {
 
    setActiveTag = (tagName) => {
       this.setState({activeTag: tagName})
-	}
+   }
+   
+   clearNotesSearch = () => {
+      this.setState({notesSearch: ''})
+   }
 
    notesContainerFilter = () => {
       if (this.state.activeTag) {
@@ -154,6 +158,7 @@ class MainInterface extends Component {
                   setActiveNote={this.setActiveNote} 
                   handleTagClick={this.setActiveTag}
                   setActiveTag={this.setActiveTag}
+                  clearNotesSearch={this.clearNotesSearch}
                />
             </Grid.Column>
             
@@ -162,7 +167,7 @@ class MainInterface extends Component {
                <NotesSearch 
                   onNotesSearchChange={this.onNotesSearchChange} 
                   notesSearch={this.state.notesSearch} 
-                  searchEmpty={this.state.notesSearchEmpty} 
+                  // searchEmpty={this.state.notesSearchEmpty} 
                   activeTag={this.state.activeTag}
                />
                <NotesContainer notes={this.notesContainerFilter()} setActiveNote={this.setActiveNote}/>

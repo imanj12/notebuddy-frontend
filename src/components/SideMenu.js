@@ -22,6 +22,7 @@ class SideMenu extends Component {
 		name === 'new-note' && this.setState({newNoteIsOpen: !this.state.newNoteIsOpen, newNoteValue: ''})
 		name === 'tags' && this.setState({tagsIsOpen: !this.state.tagsIsOpen, tagSearchValue: ''})
 		name === 'notes' && this.props.setActiveTag(null)
+		name === 'notes' && this.props.clearNotesSearch()
 	}
 
 	// handle new note submit (closes popup and posts to /notes)
