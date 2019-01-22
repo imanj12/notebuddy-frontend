@@ -57,7 +57,7 @@ class SignInForm extends Component {
                   header={this.state.error}
                   />
                ) : null }
-               <Form size='large'>
+               <Form size='large' onSubmit={this.handleLogin}>
                   <Form.Input 
                      fluid 
                      name ='username' 

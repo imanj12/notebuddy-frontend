@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Menu, Button} from 'semantic-ui-react'
+import {Menu, Button, Image, Icon} from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom'
 const Cookies = require('cookies-js')
 
@@ -18,11 +18,17 @@ class NavBar extends Component {
             {this.props.user ? (
                <Menu.Menu position='right'>
                   <Menu.Item>
+                     <Image src='https://i.imgur.com/pZY44Td.jpg' avatar/>
+                     <span>{this.props.user.username}</span>
+                  </Menu.Item>
+                  <Menu.Item>
                      <Button 
+                        // icon
                         color='teal'
                         onClick={this.logOut}
+                        content='Log out'
                      >
-                        Log-out
+                        {/* <Icon name='log out'/> */}
                      </Button>
                   </Menu.Item>
                </Menu.Menu>

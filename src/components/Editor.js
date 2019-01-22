@@ -11,7 +11,22 @@ class Editor extends Component {
       }
    }
 
-   
+   modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline','strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image'],
+      ['clean']
+    ]
+   }
+
+   formats = [
+      'header',
+      'bold', 'italic', 'underline', 'strike', 'blockquote',
+      'list', 'bullet', 'indent',
+      'link', 'image'
+   ]
 
    handleQuillChange = (value) => {
       this.setState({...this.state, content: value })
@@ -33,18 +48,24 @@ class Editor extends Component {
       return ( 
          <Fragment>
             <Segment basic>
-               {this.props.saving ? <Loader inline active/> : null}
                <Button circular icon color='teal' onClick={this.handleNoteSubmit}><Icon name='save'/></Button>
                <Button circular icon color='red' onClick={this.handleNoteDelete}><Icon name='delete'/></Button>
+               {this.props.saving ? <Loader inline active/> : null}
             </Segment>
             <Segment basic>
                <Input size='huge' value={this.state.title} onChange={this.handleTitleChange}></Input>
             </Segment>
             <Segment basic>
+               <div className='editor-container'>
                <ReactQuill 
                   value={this.state.content}
                   onChange={this.handleQuillChange}
-               />
+                  modules={this.modules}
+                  formats={this.formats}
+               >
+                  {/* <div className='editing-area'/> */}
+               </ReactQuill>
+               </div>
             </Segment>
          </Fragment>
       )
