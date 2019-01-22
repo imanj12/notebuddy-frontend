@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import ReactQuill from 'react-quill'
-import {Segment, Button, Icon, Input, Loader} from 'semantic-ui-react'
+import {Segment, Button, Icon, Input, Loader, Container} from 'semantic-ui-react'
+const Moment = require('moment')
 
 class Editor extends Component {
    constructor(props) {
@@ -9,6 +10,7 @@ class Editor extends Component {
          content: props.note.content, 
          title: props.note.title
       }
+      console.log(props.note)
    }
 
    modules = {
@@ -44,6 +46,10 @@ class Editor extends Component {
       this.props.deleteNote()
    }
 
+   convertTime = (datetime) => {
+      return Moment(datetime).format("M/D/YY - h:mma")
+   }
+
    render() {
       return ( 
          <Fragment>
@@ -54,6 +60,14 @@ class Editor extends Component {
             </Segment>
             <Segment basic>
                <Input size='huge' value={this.state.title} onChange={this.handleTitleChange}></Input>
+               <Container fluid>
+                  <p className='greyed-text'>Created on: {this.convertTime(this.props.note.created_at)}
+                     <br/>
+                     Last updated: {this.convertTime(this.props.note.updated_at)}
+                     <br/>
+                     at or around: {this.props.note.location}
+                  </p>
+               </Container>
             </Segment>
             <Segment basic>
                <div className='editor-container'>

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
-const moment = require('moment')
+const Moment = require('moment')
 
 const NoteItem = (props) => {
    
    const convertTime = (datetime) => {
-      return moment(datetime).format("M/D/YY - h:mma")
+      return Moment(datetime).format("M/D/YY - h:mma")
    }
 
    return (

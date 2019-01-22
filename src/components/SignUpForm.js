@@ -104,13 +104,13 @@ class SignUpForm extends Component {
             </Segment>
             <Divider horizontal>Or</Divider>
             <Segment>
-               <Header as='h4'>Use either method to sign in</Header>
-               <Divider horizontal />
+               {/* <Header as='h4'>Use either method to sign in</Header> */}
+               {/* <Divider horizontal /> */}
                <SignInForm setUser={this.props.setUser}/>
-               <Divider horizontal />
-               <Button color='teal' fluid size='large'>
+               {/* <Divider horizontal /> */}
+               {/* <Button color='teal' fluid size='large'>
                   Sign In with Google
-               </Button>
+               </Button> */}
             </Segment>
          </Fragment>
       )

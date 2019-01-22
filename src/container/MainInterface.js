@@ -18,8 +18,10 @@ class MainInterface extends Component {
          notesSearchEmpty: false,
          activeTag: null,
          createdTags: [],
-         saving: false
+         saving: false,
+         currentLocation: ''
       }
+      this.geoIpLookup()
    }
 
    addToCreatedTags = (tagObj) => {
@@ -72,8 +74,10 @@ class MainInterface extends Component {
          title: title.trim(),
          user_id: this.props.user.id,
          content: content,
+         location: this.state.currentLocation,
          note_tags_attributes: note_tags_attributes
       }}
+      console.log(data)
       const fetchParams = {
          method: 'PUT',
          headers: {
@@ -103,6 +107,14 @@ class MainInterface extends Component {
       fetch(url, fetchParams)
          .then(() => this.props.fetchUser())
          .then(() => this.setState({activeNote: null}))   
+   }
+
+   geoIpLookup = () => {
+      fetch('https://geoip-db.com/json/')
+         .then(r => r.json())
+         .then(data => {
+            this.setState({currentLocation: `${data.city}, ${data.state}, ${data.country_code}`}) 
+         })
    }
 
    setActiveTag = (tagName) => {

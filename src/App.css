@@ -64,3 +64,7 @@
   overflow-y: scroll;
   overflow-x: scroll;
 }
+
+.greyed-text {
+  color: #808080;
+}

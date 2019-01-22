@@ -32,7 +32,8 @@ class SideMenu extends Component {
 		const data = {note: {
 			title: this.state.newNoteValue.trim(),
 			user_id: this.props.user.id,
-			content: ''
+			content: '',
+			location: ''
 		}}
 		const fetchParams = {
 			method: 'POST',
