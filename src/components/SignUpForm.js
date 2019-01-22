@@ -1,14 +1,16 @@
 import React, {Component, Fragment} from 'react'
-import { Divider, Button, Form, Header, Segment} from 'semantic-ui-react'
+import { Divider, Button, Form, Header, Segment, Message} from 'semantic-ui-react'
 import SignInForm from './SignInForm'
 import {withRouter} from 'react-router-dom'
 const Cookies = require('cookies-js')
+const Capitalize = require('lodash/capitalize')
 
 class SignUpForm extends Component {
    state = {
       username: '',
       password: '',
-      password_confirmation: ''
+      password_confirmation: '',
+      errors: null
    }
 
    handleChange = (e) => {
@@ -16,6 +18,7 @@ class SignUpForm extends Component {
    }
    
    handleCreateUserClick = (e) => {
+      this.setState({errors: null})
       const data = {user: {...this.state}}
       const url = 'http://localhost:3000/api/v1/users'
       const fetchParams = {
@@ -28,16 +31,38 @@ class SignUpForm extends Component {
       fetch(url, fetchParams)
          .then(r => r.json())
          .then(data => {
-            Cookies.set('token', data.jwt)
-            this.props.setUser(data.user)
-            this.props.history.push('/home')
+            if (data.errors) {
+               console.log(data.errors)
+               this.setState({errors: data.errors})
+            } else {
+               Cookies.set('token', data.jwt)
+               this.props.setUser(data.user)
+               this.props.history.push('/home')
+            }
          })
+   }
+
+   mapErrors = () => {
+      const keys = Object.keys(this.state.errors)
+      return keys.map(key => {
+         let field = Capitalize(key)
+         field = field.replace('_', ' ')
+         const message = this.state.errors[key]
+         return `${field} ${message}`
+      })
    }
 
    render() {
       return (
-         <Fragment>
+         <Fragment> 
             <Segment raised>
+            { this.state.errors ? (
+               <Message
+               negative
+               header='Please correct the following:'
+               list={this.mapErrors()}
+               />
+            ) : null }
                <Form size='large'>
                   <Form.Input 
                      fluid 
@@ -53,7 +78,7 @@ class SignUpForm extends Component {
                      name='password'
                      icon='lock'
                      iconPosition='left'
-                     placeholder='Password'
+                     placeholder='Password (min. 6 characters)'
                      type='password'
                      value={this.state.password}
                      onChange={this.handleChange}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Label } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 const moment = require('moment')
 
 const NoteItem = (props) => {

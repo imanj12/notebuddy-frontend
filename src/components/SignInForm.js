@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
-import { Button, Form, Modal } from 'semantic-ui-react'
+import { Button, Form, Modal, Message } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom'
 const Cookies = require('cookies-js')
 
 class SignInForm extends Component {
    state = {
       username: 'iman',
-      password: 'iman'
+      password: 'iman',
+      error: null
    }
 
    handleChange = (e) => {
@@ -15,6 +16,7 @@ class SignInForm extends Component {
 
    handleModalClose = () => {
       this.setState({username: '', password: ''})
+      this.setState({error: null})
    }
 
    handleLogin = (e) => {
@@ -30,10 +32,14 @@ class SignInForm extends Component {
       fetch(url, fetchParams)
          .then(r => r.json())
          .then(data => {
-            console.log(data)
-            Cookies.set('token', data.jwt)
-            this.props.setUser(data.user)
-            this.props.history.push('/home')
+            if (data.error) {
+               this.setState({error: data.message})
+            } else {
+               Cookies.set('token', data.jwt)
+               this.props.setUser(data.user)
+               this.props.history.push('/home')
+            }
+            
          })
    }
 
@@ -45,6 +51,12 @@ class SignInForm extends Component {
             onClose={this.handleModalClose}
          >
             <Modal.Content>
+               { this.state.error ? (
+                  <Message
+                  negative
+                  header={this.state.error}
+                  />
+               ) : null }
                <Form size='large'>
                   <Form.Input 
                      fluid 
