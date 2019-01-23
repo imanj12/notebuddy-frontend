@@ -9,14 +9,12 @@ class Welcome extends Component {
          <div className='welcome'>
             <Grid id='welcome-grid' columns={3} verticalAlign='middle'>
                <Grid.Column textAlign='center'>
-                  <Header as='h1' inverted>
-                     Focus. Record. Do.
+                  <Header as='h1' className='welcome-left-text'>
+                     <img id='welcome-page-logo' src={require('../imgs/quill.png')} alt='scribe logo'></img>
+                     scribe
                   </Header>
-                  <Header as='h3' inverted>
-                     NoteBuddy is with you every step of the way.
-                  </Header>
-                  <Header as='h2' inverted>
-                     Free up time in your life for what matters most.
+                  <Header as='h3' className='welcome-left-text'>
+                     A streamlined note-taking experience
                   </Header>
                </Grid.Column>
                <Grid.Column />

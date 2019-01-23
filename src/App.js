@@ -39,10 +39,10 @@ class App extends Component {
    
    render() {
       return (
-         <div className='app-container' style={{ height: '100%' }}>
+         <div className='app-container'>
             <BrowserRouter>
                <>
-                  <NavBar setUser={this.setUser} user={this.state.user}/>
+                  {this.state.user ? <NavBar setUser={this.setUser} user={this.state.user}/> : null}
                   <Switch>
                      {this.state.user ? (
                         <Route path='/home' render={() => <MainInterface user={this.state.user} fetchUser={this.fetchUser}/>}/> 

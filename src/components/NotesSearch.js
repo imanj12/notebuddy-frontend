@@ -10,7 +10,7 @@ const NotesSearch = (props) => {
             onChange={props.onNotesSearchChange}
             value={props.notesSearch}
          >
-            <input style={{borderRadius: '25px'}}/>
+            <input id='notes-search' style={{borderRadius: '25px'}}/>
          </Input>
       )
 }

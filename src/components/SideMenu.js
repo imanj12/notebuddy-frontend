@@ -115,6 +115,7 @@ class SideMenu extends Component {
 					}
 					content={
 						<>
+						{/* <div className='tags-popup'> */}
 							<TagsSearch 
 								tagSearchValue={this.state.tagSearchValue}
 								onTagSearchChange={this.onTagSearchChange}	
@@ -122,6 +123,7 @@ class SideMenu extends Component {
 							<SideMenuTagsContainer 
 								tags={this.provideTags()} 
 								handleTagClick={this.handleTagClick}/>
+						{/* </div> */}
 						</>
 					}
 				/>

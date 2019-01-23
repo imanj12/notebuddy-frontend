@@ -1,51 +1,113 @@
-/* .App {
-  text-align: center;
+html {
+  height: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+body {
+  height: 100%;
+  /* margin: 0;
+  padding: 0; */
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 
 #root {
   height: 100%;
 }
 
+.app-container {
+  height: 100%;
+}
+
+.height-94 {
+  height: 94vh;
+}
+
+.greyed-text {
+  color: #808080;
+}
+
+.ui.fluid.button, #log-out-button {
+  background-color: #e1ae77f2;
+}
+
+.pic-width {
+  width: 30%;
+  padding-left: 5%;
+  padding-right: 5%;
+  opacity: 0.3;
+}
+
+/*========================*/
+/* Navbar */
+
+#navbar-logo-menu {
+  margin: 0;
+  padding: 0;
+}
+
+#navbar-logo {
+  width: 75px;
+  margin: 0;
+  padding: 0;
+}
+
+#navbar {
+  background-color: #FEF5F4;
+  max-height: 6vh;
+}
+
+.welcome-left-text {
+  text-shadow: 3px 3px 10px #ffffffc9;
+}
+
+/* End Navbar */
+/*========================*/
+/* Welcome Page */
+
 .welcome {
   height: 100%;
-  background-image: url('./imgs/adult-alone-blur-1172207.jpg');
+  background-image: url('./imgs/foggy-forest.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  border: 1px solid rgba(0,0,0,0)}
+
+#welcome-page-logo {
+  width: 100px;
+  margin: 0;
+  padding: 0;
 }
 
 #welcome-grid {
   padding-top: 10%;
+}
+
+/* End Welcome Page */
+/*========================*/
+/* Editor */
+
+.ql-editor {
+  min-height: 60vh !important;
+  max-height: 60vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+#editor-header {
+  padding-left: 14px;
+  padding-right: 14px
+}
+
+/* End Editor */
+/*========================*/
+/* SideMenu */
+
+#side-menu-column {
+  background-color: #cfc7c7; 
+}
+
+.tags-popup {
+  width: 50%;
 }
 
 .side-menu-tags {
@@ -53,18 +115,24 @@
 
 }
 
-.editing-container {
-  height: 500px;
-}
+/* End SideMenu */
+/*========================*/
+/* Note Container */
 
-.ql-editor {
-  min-height: 500px !important;
-  max-height: 500px;
+#notes-list {
+  max-height: 96%;
   overflow: hidden;
   overflow-y: scroll;
-  overflow-x: scroll;
+  /* direction: ltr; */
 }
 
-.greyed-text {
-  color: #808080;
+.note-item {
+  /* direction: ltr; */
 }
+
+#root > div > div.ui.three.column.grid.height-94 > div.three.wide.column > div.ui.massive.borderless.fluid.pointing.vertical.menu {
+  /* max-height: 100; */
+}
+
+/* End Note Container */
+/*========================*/

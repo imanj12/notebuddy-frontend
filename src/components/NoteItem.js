@@ -9,11 +9,12 @@ const NoteItem = (props) => {
    }
 
    return (
+      <div className='note-item'>
       <Menu.Item 
          name={props.note.id.toString()}
          active={props.activeItem === props.note.id.toString()} 
          onClick={props.handleItemClick}
-      >
+         >
          <Menu.Header>
             {props.note.title}
          </Menu.Header>   
@@ -23,6 +24,7 @@ const NoteItem = (props) => {
             </Menu.Item>
          </Menu.Menu>         
       </Menu.Item>
+      </div>
    )
 }
 

@@ -46,7 +46,7 @@ class SignInForm extends Component {
    render() {
       return (
          <Modal 
-            trigger={<Button color='teal' fluid size='large'>Sign In</Button>} 
+            trigger={<Button fluid size='large'>Sign In</Button>} 
             style={{ maxWidth: 450 }}
             onClose={this.handleModalClose}
          >
@@ -79,7 +79,6 @@ class SignInForm extends Component {
                   <Button 
                      fluid 
                      content='Sign In' 
-                     color='teal' 
                      size='large' 
                      onClick={this.handleLogin}
                   />

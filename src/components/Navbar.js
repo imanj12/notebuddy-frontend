@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Menu, Button, Image, Icon} from 'semantic-ui-react'
+import {Menu, Button, Image} from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom'
 const Cookies = require('cookies-js')
 
@@ -13,8 +13,11 @@ class NavBar extends Component {
 
    render() {
       return (
-         <Menu size='massive' borderless>
-            <Menu.Item name='notebuddy logo here'/>
+         <Menu id='navbar' size='massive' borderless>
+            <Menu.Item id="navbar-logo-menu">
+               <img id='navbar-logo' src={require('../imgs/quill.png')} alt='scribe logo'></img>
+               scribe
+            </Menu.Item>
             {this.props.user ? (
                <Menu.Menu position='right'>
                   <Menu.Item>
@@ -23,8 +26,7 @@ class NavBar extends Component {
                   </Menu.Item>
                   <Menu.Item>
                      <Button 
-                        // icon
-                        color='teal'
+                        id='log-out-button'
                         onClick={this.logOut}
                         content='Log out'
                      >
@@ -33,7 +35,6 @@ class NavBar extends Component {
                   </Menu.Item>
                </Menu.Menu>
             ) : null}
-            
          </Menu>
       )
    }

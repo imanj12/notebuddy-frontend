@@ -14,8 +14,12 @@ class Editor extends Component {
 
    modules = {
     toolbar: [
-      [{ 'header': [1, 2, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
+      [{ 'font': [] }],
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      ['bold', 'italic', 'underline','strike', 'blockquote', 'code-block'],
+      [{ 'script': 'sub' }, { 'script': 'super' }],
+      [{ 'color': [] }, { 'background': [] }],
+      [{ 'align': [] }],
       [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
       ['link', 'image'],
       ['clean']
@@ -52,33 +56,28 @@ class Editor extends Component {
    render() {
       return ( 
          <Fragment>
-            <Segment basic>
+            <div id='editor-header'>
+               <Input size='huge' value={this.state.title} onChange={this.handleTitleChange}></Input>
                <Button circular icon color='teal' onClick={this.handleNoteSubmit}><Icon name='save'/></Button>
                <Button circular icon color='red' onClick={this.handleNoteDelete}><Icon name='delete'/></Button>
                {this.props.saving ? <Loader inline active/> : null}
-            </Segment>
-            <Segment basic>
-               <Input size='huge' value={this.state.title} onChange={this.handleTitleChange}></Input>
                <Container fluid>
-                  <p className='greyed-text'>Created on: {this.convertTime(this.props.note.created_at)}
+                  <br/>
+                  <p className='greyed-text'>
+                     <strong>Created:</strong> {this.convertTime(this.props.note.created_at)}
                      <br/>
-                     Last updated: {this.convertTime(this.props.note.updated_at)}
-                     <br/>
-                     near: {this.props.note.location}
+                     <strong>Last updated:</strong> {this.convertTime(this.props.note.updated_at)} <strong>near</strong> {this.props.note.location}
                   </p>
                </Container>
-            </Segment>
+            </div>
             <Segment basic>
-               <div className='editor-container'>
                <ReactQuill 
                   value={this.state.content}
                   onChange={this.handleQuillChange}
                   modules={this.modules}
                   formats={this.formats}
                >
-                  {/* <div className='editing-area'/> */}
                </ReactQuill>
-               </div>
             </Segment>
          </Fragment>
       )

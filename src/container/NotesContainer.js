@@ -15,7 +15,7 @@ class NotesContainer extends Component {
    render() {
       return (
          <Fragment>
-            <Menu vertical fluid pointing borderless size='massive'>
+            <Menu id='notes-list' vertical fluid pointing borderless size='massive'>
                {this.props.notes.map(note => (
                   <NoteItem 
                      key={note.id} 
@@ -27,6 +27,7 @@ class NotesContainer extends Component {
                   )).reverse()
                }
             </Menu>
+
          </Fragment>
       )
    }

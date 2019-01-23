@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import {Grid, Header} from 'semantic-ui-react'
+import {Grid, Container} from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom'
 import SideMenu from '../components/SideMenu'
 import NotesContainer from './NotesContainer'
@@ -89,7 +89,7 @@ class MainInterface extends Component {
          .then(r => r.json())
          .then(data => {
             this.props.fetchUser()
-            setInterval(() => this.setState({saving: false}), 1000)
+            setInterval(() => this.setState({saving: false}), 1500)
          })
    }
 
@@ -137,9 +137,6 @@ class MainInterface extends Component {
             note.title.toLowerCase().includes(this.state.notesSearch) || note.content.includes(this.state.notesSearch)
          ))
       }
-      // this.props.user.notes.filter(note => (         
-      //    note.title.toLowerCase().includes(this.state.notesSearch) || note.content.includes(this.state.notesSearch)
-      // ))
    }
 
    onNotesSearchChange = (e, data) => {
@@ -148,10 +145,10 @@ class MainInterface extends Component {
 
    render() {
       return (
-         <Grid columns={3}>
+         <Grid columns={3} className='height-94'>
             
             {/* column 1: side menu */}
-            <Grid.Column width={1}>
+            <Grid.Column width={1} id='side-menu-column'>
                <SideMenu 
                   user={this.props.user} 
                   fetchUser={this.props.fetchUser} 
@@ -174,7 +171,7 @@ class MainInterface extends Component {
             </Grid.Column>
             
             {/* column 3: editor and tags */}
-            <Grid.Column width={12}>
+            <Grid.Column width={12} verticalAlign={this.state.activeNote ? false : 'middle'}>
                {this.state.activeNote ? (
                   <Fragment key={this.state.activeNote}>
                      <Editor 
@@ -198,7 +195,12 @@ class MainInterface extends Component {
                      />
                   </Fragment>
                ) : (
-                  <Header as='h1' textAlign='center'>Select a note, or create a new one!</Header>
+                  <Container textAlign='center'>
+                     <img className='pic-width' src={require('../imgs/to-do.png')} alt='to-do'></img>
+                     <img className='pic-width' src={require('../imgs/note.png')} alt='note'></img>
+                     <img className='pic-width' src={require('../imgs/notebook.png')} alt='notebook'></img>
+                     <h1>Select or create a note to the left</h1>
+                  </Container>
                )}
             </Grid.Column>
          </Grid>

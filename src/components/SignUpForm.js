@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import { Divider, Button, Form, Header, Segment, Message} from 'semantic-ui-react'
+import { Divider, Button, Form, Segment, Message} from 'semantic-ui-react'
 import SignInForm from './SignInForm'
 import {withRouter} from 'react-router-dom'
 const Cookies = require('cookies-js')
@@ -96,7 +96,6 @@ class SignUpForm extends Component {
                   <Button 
                      fluid 
                      content='Sign Up' 
-                     color='teal' 
                      size='large' 
                      onClick={this.handleCreateUserClick}
                   />
