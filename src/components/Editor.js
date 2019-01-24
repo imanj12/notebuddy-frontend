@@ -85,7 +85,7 @@ class Editor extends Component {
       return ( 
          <Fragment>
             <div id='editor-header'>
-               <Input size='huge' value={this.state.title} onChange={this.handleTitleChange}></Input>
+               <Input size='huge' value={this.state.title} onChange={this.handleTitleChange} placeholder='Title...'></Input>
                <Button id='save-btn' circular icon onClick={this.handleNoteSubmit}><Icon name='save' inverted size='large'/></Button>
                <Modal 
                   basic 
