@@ -131,6 +131,11 @@ body {
   color: white;
 }
 
+.save-text {
+  color: white;
+  padding-left: 1%;
+}
+
 /* End Editor */
 /*========================*/
 /* SideMenu */

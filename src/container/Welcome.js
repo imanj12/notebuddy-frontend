@@ -7,7 +7,7 @@ class Welcome extends Component {
    render () {
       return (
          <div className='welcome'>
-            <Grid id='welcome-grid' columns={3} verticalAlign='middle'>
+            <Grid id='welcome-grid' columns={3}>
                <Grid.Column textAlign='center'>
                   <Header as='h1' className='welcome-left-text'>
                      <img id='welcome-page-logo' src={require('../imgs/quill.png')} alt='scribe logo'></img>

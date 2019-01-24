@@ -10,33 +10,35 @@ class Editor extends Component {
          content: props.note.content, 
          title: props.note.title,
          deleteModalOpen: false,
-         // saved: props.saved
       }
       console.log('constructed')
    }
 
-   // componentDidUpdate = (prevProps, prevState) => {
-   //    if (this.state.saved === true && this.props.note.content !== this.state.content) {
-   //       this.setState({saved: false})
-   //    }
+   componentDidUpdate = () => {
+      if (this.props.saved === true && ( (this.props.note.content !== this.state.content) || (this.props.note.title !== this.state.title) )) {
+         this.props.setSaved(false)
+      }
 
-   //    if (this.props.saved === true && prevProps.saved !== true) {
-   //       this.setState({saved: true})
-   //    }
-   // }
+      // if (this.props.saved === true && prevProps.saved !== true) {
+      //    this.setState({saved: true})
+      // }
+   }
 
    modules = {
-    toolbar: [
-      [{ 'font': [] }],
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote', 'code-block'],
-      [{ 'script': 'sub' }, { 'script': 'super' }],
-      [{ 'color': [] }, { 'background': [] }],
-      [{ 'align': [] }],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
-      ['clean']
-    ]
+      toolbar: [
+         [{ 'font': [] }],
+         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+         ['bold', 'italic', 'underline','strike', 'blockquote', 'code-block'],
+         [{ 'script': 'sub' }, { 'script': 'super' }],
+         [{ 'color': [] }, { 'background': [] }],
+         [{ 'align': [] }],
+         [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+         ['link', 'image'],
+         ['clean'],
+      ],
+      clipboard: {
+         matchVisual: false,
+      }
    }
 
    formats = [
@@ -106,7 +108,7 @@ class Editor extends Component {
                   </Modal.Actions>
                </Modal>
                {this.props.saving ? <Loader id='loader' inline active inverted/> : null}
-               {/* {this.state.saved ? <strong>saved</strong> : <strong>unsaved</strong>} */}
+               {this.props.saved ? <strong className='save-text'>saved</strong> : <strong className='save-text'>unsaved</strong>}
                <Container fluid className='editor-metadata'>
                   <br/>
                   <p>
