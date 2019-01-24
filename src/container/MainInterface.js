@@ -199,7 +199,7 @@ class MainInterface extends Component {
                      <img className='pic-width' src={require('../imgs/to-do.png')} alt='to-do'></img>
                      <img className='pic-width' src={require('../imgs/note.png')} alt='note'></img>
                      <img className='pic-width' src={require('../imgs/notebook.png')} alt='notebook'></img>
-                     <h1>Select or create a note to the left</h1>
+                     <h1 style={{opacity: 0.3}}>Select or create a note to the left</h1>
                   </Container>
                )}
             </Grid.Column>

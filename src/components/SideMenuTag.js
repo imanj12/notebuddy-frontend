@@ -9,7 +9,6 @@ const SideMenuTag = (props) => {
 
    return (
       <div style={divStyle}>
-      {/* <div className='side-menu-tags'> */}
          <Label as='a' tag
             name={props.tag.name}
             content={props.tag.name}

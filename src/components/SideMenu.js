@@ -20,9 +20,10 @@ class SideMenu extends Component {
 	// handle opening and closing of popups on icon click
 	handleItemClick = (e, { name }) => {
 		name === 'new-note' && this.setState({newNoteIsOpen: !this.state.newNoteIsOpen, newNoteValue: ''})
-		name === 'tags' && this.setState({tagsIsOpen: !this.state.tagsIsOpen, tagSearchValue: ''})
+		name === 'tags' && this.setState({tagsIsOpen: !this.state.tagsIsOpen, tagSearchValue: '', newNoteisOpen: false})
 		name === 'notes' && this.props.setActiveTag(null)
 		name === 'notes' && this.props.clearNotesSearch()
+		name === 'notes' && this.setState({newNoteIsOpen: false, tagsIsOpen: false})
 	}
 
 	// handle new note submit (closes popup and posts to /notes)
@@ -75,10 +76,10 @@ class SideMenu extends Component {
 					open={this.state.newNoteIsOpen}
 					trigger={
 						<Menu.Item 
-							name='new-note' 
+							name='new-note'
 							onClick={this.handleItemClick}
 						>
-							<Icon name='add' />
+							<Icon name='add'/>
 							New
 						</Menu.Item>
 					}
@@ -115,7 +116,6 @@ class SideMenu extends Component {
 					}
 					content={
 						<>
-						{/* <div className='tags-popup'> */}
 							<TagsSearch 
 								tagSearchValue={this.state.tagSearchValue}
 								onTagSearchChange={this.onTagSearchChange}	
@@ -123,7 +123,6 @@ class SideMenu extends Component {
 							<SideMenuTagsContainer 
 								tags={this.provideTags()} 
 								handleTagClick={this.handleTagClick}/>
-						{/* </div> */}
 						</>
 					}
 				/>

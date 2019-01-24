@@ -65,10 +65,10 @@ class TagSelector extends Component {
             <h3>Tag note</h3>
             <Dropdown 
                options={this.state.options}
-               placeholder='Choose Tags'
+               placeholder='Start typing...'
+               fluid
                search
                selection
-               fluid
                multiple
                allowAdditions
                value={this.state.currentValues}

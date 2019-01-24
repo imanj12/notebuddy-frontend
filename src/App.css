@@ -1,3 +1,9 @@
+:root {
+  --navbar-color: #0E8389;
+  --sidemenu-color: #0E8389;
+  --button-color: rgb(236, 163, 95);
+}
+
 html {
   height: 100%;
 }
@@ -18,6 +24,7 @@ body {
 
 .height-94 {
   height: 94vh;
+  background-color: var(--sidemenu-color);
 }
 
 .greyed-text {
@@ -25,7 +32,7 @@ body {
 }
 
 .ui.fluid.button, #log-out-button {
-  background-color: #e1ae77f2;
+  background-color: var(--button-color);
 }
 
 .pic-width {
@@ -44,18 +51,14 @@ body {
 }
 
 #navbar-logo {
-  width: 75px;
+  width: 70px;
   margin: 0;
-  padding: 0;
+  margin-left: 10%;
 }
 
 #navbar {
-  background-color: #FEF5F4;
+  background-color: var(--navbar-color);
   max-height: 6vh;
-}
-
-.welcome-left-text {
-  text-shadow: 3px 3px 10px #ffffffc9;
 }
 
 /* End Navbar */
@@ -77,6 +80,10 @@ body {
   padding: 0;
 }
 
+.welcome-left-text {
+  text-shadow: 3px 3px 10px #ffffffc9;
+}
+
 #welcome-grid {
   padding-top: 10%;
 }
@@ -91,6 +98,11 @@ body {
   overflow: hidden;
   overflow-y: scroll;
   overflow-x: scroll;
+  background-color: white;
+}
+
+.ql-toolbar {
+  background-color: white;
 }
 
 #editor-header {
@@ -98,21 +110,39 @@ body {
   padding-right: 14px
 }
 
+#save-btn {
+  margin-left: 1%;
+  background-color: rgba(0,0,0,0)
+}
+
+#delete-btn {
+  margin-left: 1%;
+  background-color: rgba(0,0,0,0)
+}
+
+#loader {
+  margin-left: 1%;
+}
+
 /* End Editor */
 /*========================*/
 /* SideMenu */
 
 #side-menu-column {
-  background-color: #cfc7c7; 
-}
-
-.tags-popup {
-  width: 50%;
+  background-color: var(--sidemenu-color); 
 }
 
 .side-menu-tags {
   float: left;
+}
 
+body > div.ui.right.center.popup.transition.visible > form > div {
+  margin-bottom: 0;
+}
+
+body > div.ui.right.center.wide.popup.transition.visible {
+  left: 5% !important;
+  right: auto !important;
 }
 
 /* End SideMenu */
@@ -120,7 +150,7 @@ body {
 /* Note Container */
 
 #notes-list {
-  max-height: 96%;
+  max-height: 95.5%;
   overflow: hidden;
   overflow-y: scroll;
   /* direction: ltr; */

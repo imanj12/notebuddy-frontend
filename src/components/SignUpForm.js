@@ -56,13 +56,18 @@ class SignUpForm extends Component {
       return (
          <Fragment> 
             <Segment raised>
-            { this.state.errors ? (
-               <Message
-               negative
-               header='Please correct the following:'
-               list={this.mapErrors()}
-               />
-            ) : null }
+               { this.state.errors ? (
+                  <Message
+                  negative
+                  header='Please correct the following:'
+                  list={this.mapErrors()}
+                  />
+               ) : (
+                  <Message
+                     header='Welcome to scribe'
+                     content='Create an account below'
+                  />
+               ) }
                <Form size='large'>
                   <Form.Input 
                      fluid 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, Form, Modal, Message } from 'semantic-ui-react'
+import { Button, Form, Modal, Message, Container } from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom'
 const Cookies = require('cookies-js')
 
@@ -53,10 +53,12 @@ class SignInForm extends Component {
             <Modal.Content>
                { this.state.error ? (
                   <Message
-                  negative
-                  header={this.state.error}
+                     negative
+                     header={this.state.error}
                   />
-               ) : null }
+               ) : (
+                  null
+               )}
                <Form size='large' onSubmit={this.handleLogin}>
                   <Form.Input 
                      fluid 

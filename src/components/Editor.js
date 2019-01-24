@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import ReactQuill from 'react-quill'
-import {Segment, Button, Icon, Input, Loader, Container} from 'semantic-ui-react'
+import {Segment, Button, Icon, Input, Loader, Container, Modal, Header} from 'semantic-ui-react'
 const Moment = require('moment')
 
 class Editor extends Component {
@@ -58,12 +58,30 @@ class Editor extends Component {
          <Fragment>
             <div id='editor-header'>
                <Input size='huge' value={this.state.title} onChange={this.handleTitleChange}></Input>
-               <Button circular icon color='teal' onClick={this.handleNoteSubmit}><Icon name='save'/></Button>
-               <Button circular icon color='red' onClick={this.handleNoteDelete}><Icon name='delete'/></Button>
-               {this.props.saving ? <Loader inline active/> : null}
+               <Button id='save-btn' circular icon onClick={this.handleNoteSubmit}><Icon name='save' inverted size='large'/></Button>
+               <Modal 
+                  basic 
+                  size='small'
+                  trigger={<Button id='delete-btn' circular icon color='red' onClick={this.handleNoteDelete}><Icon name='delete' color='red' size='large'/></Button>}>
+                  <Header icon='archive' content='Archive Old Messages' />
+                  <Modal.Content>
+                     <p>
+                     Your inbox is getting full, would you like us to enable automatic archiving of old messages?
+                     </p>
+                  </Modal.Content>
+                  <Modal.Actions>
+                     <Button basic color='red' inverted>
+                     <Icon name='remove' /> No
+                     </Button>
+                     <Button color='green' inverted>
+                     <Icon name='checkmark' /> Yes
+                     </Button>
+                  </Modal.Actions>
+               </Modal>
+               {this.props.saving ? <Loader id='loader' inline active inverted/> : null}
                <Container fluid>
                   <br/>
-                  <p className='greyed-text'>
+                  <p>
                      <strong>Created:</strong> {this.convertTime(this.props.note.created_at)}
                      <br/>
                      <strong>Last updated:</strong> {this.convertTime(this.props.note.updated_at)} <strong>near</strong> {this.props.note.location}

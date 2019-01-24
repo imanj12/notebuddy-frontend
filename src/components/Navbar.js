@@ -13,10 +13,10 @@ class NavBar extends Component {
 
    render() {
       return (
-         <Menu id='navbar' size='massive' borderless>
+         <Menu id='navbar' size='massive' borderless secondary inverted>
             <Menu.Item id="navbar-logo-menu">
-               <img id='navbar-logo' src={require('../imgs/quill.png')} alt='scribe logo'></img>
-               scribe
+               <img id='navbar-logo' src={require('../imgs/quill-white.png')} alt='scribe logo'></img>
+               <p style={{fontSize: '40px'}}>scribe</p>
             </Menu.Item>
             {this.props.user ? (
                <Menu.Menu position='right'>
