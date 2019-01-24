@@ -8,7 +8,8 @@ class Editor extends Component {
       super(props)
       this.state = { 
          content: props.note.content, 
-         title: props.note.title
+         title: props.note.title,
+         deleteModalOpen: false
       }
    }
 
@@ -27,8 +28,12 @@ class Editor extends Component {
    }
 
    formats = [
+      'font',
       'header',
-      'bold', 'italic', 'underline', 'strike', 'blockquote',
+      'bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block',
+      'script',
+      'color', 'background',
+      'align',
       'list', 'bullet', 'indent',
       'link', 'image'
    ]
@@ -46,11 +51,20 @@ class Editor extends Component {
    }
 
    handleNoteDelete = () => {
+      this.handleModalClose()
       this.props.deleteNote()
    }
 
    convertTime = (datetime) => {
       return Moment(datetime).format("M/D/YY - h:mma")
+   }
+
+   handleModalClose = () => {
+      this.setState({deleteModalOpen: false})
+   }
+
+   handleModalOpen = () => {
+      this.setState({deleteModalOpen: true})
    }
 
    render() {
@@ -62,19 +76,22 @@ class Editor extends Component {
                <Modal 
                   basic 
                   size='small'
-                  trigger={<Button id='delete-btn' circular icon color='red' onClick={this.handleNoteDelete}><Icon name='delete' color='red' size='large'/></Button>}>
-                  <Header icon='archive' content='Archive Old Messages' />
+                  trigger={<Button id='delete-btn' circular icon color='red' onClick={this.handleModalOpen}><Icon name='delete' color='red' size='large'/></Button>}
+                  open={this.state.deleteModalOpen}
+                  onClose={this.handleModalClose}
+                  >
+                  <Header icon='trash alternate' content='Delete?' />
                   <Modal.Content>
                      <p>
-                     Your inbox is getting full, would you like us to enable automatic archiving of old messages?
+                        Are you sure you'd like to delete this note?
                      </p>
                   </Modal.Content>
                   <Modal.Actions>
-                     <Button basic color='red' inverted>
-                     <Icon name='remove' /> No
+                     <Button basic color='green' inverted onClick={this.handleModalClose}>
+                        <Icon name='remove' /> No
                      </Button>
-                     <Button color='green' inverted>
-                     <Icon name='checkmark' /> Yes
+                     <Button color='red' inverted onClick={this.handleNoteDelete}>
+                        <Icon name='checkmark' /> Yes
                      </Button>
                   </Modal.Actions>
                </Modal>

@@ -171,7 +171,7 @@ class MainInterface extends Component {
             </Grid.Column>
             
             {/* column 3: editor and tags */}
-            <Grid.Column width={12} verticalAlign={this.state.activeNote ? false : 'middle'}>
+            <Grid.Column width={12} verticalAlign={this.state.activeNote ? 'top' : 'middle'}>
                {this.state.activeNote ? (
                   <Fragment key={this.state.activeNote}>
                      <Editor 
