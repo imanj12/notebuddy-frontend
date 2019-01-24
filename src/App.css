@@ -35,13 +35,6 @@ body {
   background-color: var(--button-color);
 }
 
-.pic-width {
-  width: 30%;
-  padding-left: 5%;
-  padding-right: 5%;
-  opacity: 0.3;
-}
-
 /*========================*/
 /* Navbar */
 
@@ -124,6 +117,16 @@ body {
   margin-left: 1%;
 }
 
+#editor-placeholder {
+  opacity: 0.4;
+}
+
+.editor-placeholder-pic {
+  width: 30%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
 /* End Editor */
 /*========================*/
 /* SideMenu */
@@ -143,6 +146,7 @@ body > div.ui.right.center.popup.transition.visible > form > div {
 body > div.ui.right.center.wide.popup.transition.visible {
   left: 5% !important;
   right: auto !important;
+  min-width: 200px; 
 }
 
 /* End SideMenu */

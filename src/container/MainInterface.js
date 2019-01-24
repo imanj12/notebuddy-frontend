@@ -195,11 +195,11 @@ class MainInterface extends Component {
                      />
                   </Fragment>
                ) : (
-                  <Container textAlign='center'>
-                     <img className='pic-width' src={require('../imgs/to-do.png')} alt='to-do'></img>
-                     <img className='pic-width' src={require('../imgs/note.png')} alt='note'></img>
-                     <img className='pic-width' src={require('../imgs/notebook.png')} alt='notebook'></img>
-                     <h1 style={{opacity: 0.3}}>Select or create a note to the left</h1>
+                  <Container id='editor-placeholder' textAlign='center'>
+                     <img className='editor-placeholder-pic' src={require('../imgs/to-do.png')} alt='to-do'></img>
+                     <img className='editor-placeholder-pic' src={require('../imgs/note.png')} alt='note'></img>
+                     <img className='editor-placeholder-pic' src={require('../imgs/notebook.png')} alt='notebook'></img>
+                     <h1>Select or create a note to the left</h1>
                   </Container>
                )}
             </Grid.Column>
