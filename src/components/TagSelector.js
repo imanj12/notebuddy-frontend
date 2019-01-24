@@ -15,6 +15,7 @@ class TagSelector extends Component {
    handleAddition = (e, { value }) => {
       console.log('handle addition value:')
       value = value.trim()
+      // this.props.setSaved(false)
       console.log(value)
       if (!this.state.options.find(option => option.value === value)) {
          this.setState({
@@ -52,6 +53,7 @@ class TagSelector extends Component {
       } 
       console.log('handle change value:')
       console.log(value)
+      // this.props.setSaved(false)
       this.setState({ 
          currentValues: value
       }, () => {
