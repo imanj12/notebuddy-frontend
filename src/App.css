@@ -136,6 +136,10 @@ body {
   padding-left: 1%;
 }
 
+#editor-arrow {
+  transform: rotate(-10deg)
+}
+
 /* End Editor */
 /*========================*/
 /* SideMenu */

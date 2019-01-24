@@ -206,6 +206,7 @@ class MainInterface extends Component {
                   </Fragment>
                ) : (
                   <Container id='editor-placeholder' textAlign='center'>
+                     {/* <img id='editor-arrow' className='editor-placeholder-pic' src={require('../imgs/curved-arrow.png')} alt='left-arrow'/> */}
                      <img className='editor-placeholder-pic' src={require('../imgs/to-do.png')} alt='to-do'></img>
                      <img className='editor-placeholder-pic' src={require('../imgs/note.png')} alt='note'></img>
                      <img className='editor-placeholder-pic' src={require('../imgs/notebook.png')} alt='notebook'></img>
