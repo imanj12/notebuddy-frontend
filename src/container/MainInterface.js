@@ -139,11 +139,18 @@ class MainInterface extends Component {
             .notes
             .filter(note => (         
                note.title.toLowerCase().includes(this.state.notesSearch) || note.content.includes(this.state.notesSearch)
-            ))
+            )
+            .sort(function (a,b) {
+               return new Date(a.updated_at) - new Date(b.updated_at)
+            })
+            )
       } else {
          return this.props.user.notes.filter(note => (         
             note.title.toLowerCase().includes(this.state.notesSearch) || note.content.includes(this.state.notesSearch)
          ))
+            .sort(function (a,b) {
+               return new Date(a.updated_at) - new Date(b.updated_at)
+            })
       }
    }
 
