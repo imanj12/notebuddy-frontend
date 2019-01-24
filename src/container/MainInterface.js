@@ -19,7 +19,8 @@ class MainInterface extends Component {
          activeTag: null,
          createdTags: [],
          saving: false,
-         currentLocation: ''
+         currentLocation: '',
+         // saved: true
       }
       this.geoIpLookup()
    }
@@ -89,7 +90,10 @@ class MainInterface extends Component {
          .then(r => r.json())
          .then(data => {
             this.props.fetchUser()
-            setInterval(() => this.setState({saving: false}), 1500)
+            setInterval(() => {
+               this.setState({saving: false})
+               // this.setSaved()
+            }, 1500)
          })
    }
 
@@ -107,6 +111,10 @@ class MainInterface extends Component {
          .then(() => this.props.fetchUser())
          .then(() => this.setState({activeNote: null}))   
    }
+
+   // setSaved = () => {
+   //    this.setState({saved: true})
+   // }
 
    geoIpLookup = () => {
       fetch('https://geoip-db.com/json/')
@@ -182,6 +190,7 @@ class MainInterface extends Component {
                         saveNote={this.saveNote}
                         deleteNote={this.deleteNote}
                         saving={this.state.saving}
+                        saved={this.state.saved}
                         />
                      <TagSelector 
                         user={this.props.user}

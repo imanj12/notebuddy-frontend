@@ -9,9 +9,21 @@ class Editor extends Component {
       this.state = { 
          content: props.note.content, 
          title: props.note.title,
-         deleteModalOpen: false
+         deleteModalOpen: false,
+         // saved: props.saved
       }
+      console.log('constructed')
    }
+
+   // componentDidUpdate = (prevProps, prevState) => {
+   //    if (this.state.saved === true && this.props.note.content !== this.state.content) {
+   //       this.setState({saved: false})
+   //    }
+
+   //    if (this.props.saved === true && prevProps.saved !== true) {
+   //       this.setState({saved: true})
+   //    }
+   // }
 
    modules = {
     toolbar: [
@@ -94,6 +106,7 @@ class Editor extends Component {
                   </Modal.Actions>
                </Modal>
                {this.props.saving ? <Loader id='loader' inline active inverted/> : null}
+               {/* {this.state.saved ? <strong>saved</strong> : <strong>unsaved</strong>} */}
                <Container fluid className='editor-metadata'>
                   <br/>
                   <p>
