@@ -127,6 +127,10 @@ body {
   padding-right: 5%;
 }
 
+.editor-metadata {
+  color: white;
+}
+
 /* End Editor */
 /*========================*/
 /* SideMenu */
@@ -147,6 +151,10 @@ body > div.ui.right.center.wide.popup.transition.visible {
   left: 5% !important;
   right: auto !important;
   min-width: 200px; 
+}
+
+.side-menu-icon-text {
+  color: white;
 }
 
 /* End SideMenu */

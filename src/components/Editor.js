@@ -94,7 +94,7 @@ class Editor extends Component {
                   </Modal.Actions>
                </Modal>
                {this.props.saving ? <Loader id='loader' inline active inverted/> : null}
-               <Container fluid>
+               <Container fluid className='editor-metadata'>
                   <br/>
                   <p>
                      <strong>Created:</strong> {this.convertTime(this.props.note.created_at)}

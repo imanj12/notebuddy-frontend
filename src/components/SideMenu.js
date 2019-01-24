@@ -79,8 +79,8 @@ class SideMenu extends Component {
 							name='new-note'
 							onClick={this.handleItemClick}
 						>
-							<Icon name='add'/>
-							New
+							<Icon name='add' inverted/>
+							<span className='side-menu-icon-text'>New</span>
 						</Menu.Item>
 					}
 					content={
@@ -96,8 +96,8 @@ class SideMenu extends Component {
 					name='notes'
 					onClick={this.handleItemClick}
 				>
-					<Icon name='sticky note' />
-					All Notes
+					<Icon name='sticky note' inverted/>
+					<span className='side-menu-icon-text'>All Notes</span>
 				</Menu.Item>
 				
 				<Popup
@@ -110,8 +110,8 @@ class SideMenu extends Component {
 							name='tags'
 							onClick={this.handleItemClick}
 						>
-							<Icon name='tags' />
-							Tags
+							<Icon name='tags' inverted/>
+							<span className='side-menu-icon-text'>Tags</span>
 						</Menu.Item>
 					}
 					content={

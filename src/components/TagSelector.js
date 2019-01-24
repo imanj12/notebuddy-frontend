@@ -62,7 +62,7 @@ class TagSelector extends Component {
    render() {
       return (
          <Segment basic>
-            <h3>Tag note</h3>
+            <h2 className='editor-metadata'>Tag</h2>
             <Dropdown 
                options={this.state.options}
                placeholder='Start typing...'

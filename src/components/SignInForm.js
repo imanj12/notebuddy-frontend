@@ -79,10 +79,11 @@ class SignInForm extends Component {
                      onChange={this.handleChange}
                   />
                   <Button 
+                     type='submit'
                      fluid 
                      content='Sign In' 
                      size='large' 
-                     onClick={this.handleLogin}
+                     // onClick={this.handleLogin}
                   />
                </Form>
             </Modal.Content>
