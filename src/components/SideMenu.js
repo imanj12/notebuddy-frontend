@@ -19,8 +19,8 @@ class SideMenu extends Component {
 
 	// handle opening and closing of popups on icon click
 	handleItemClick = (e, { name }) => {
-		name === 'new-note' && this.setState({newNoteIsOpen: !this.state.newNoteIsOpen, newNoteValue: ''})
-		name === 'tags' && this.setState({tagsIsOpen: !this.state.tagsIsOpen, tagSearchValue: '', newNoteisOpen: false})
+		name === 'new-note' && this.setState({newNoteIsOpen: !this.state.newNoteIsOpen, newNoteValue: '', tagsIsOpen: false})
+		name === 'tags' && this.setState({tagsIsOpen: !this.state.tagsIsOpen, tagSearchValue: '', newNoteIsOpen: false})
 		name === 'notes' && this.props.setActiveTag(null)
 		name === 'notes' && this.props.clearNotesSearch()
 		name === 'notes' && this.setState({newNoteIsOpen: false, tagsIsOpen: false})

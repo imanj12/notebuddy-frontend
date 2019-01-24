@@ -80,11 +80,9 @@ class Editor extends Component {
                   open={this.state.deleteModalOpen}
                   onClose={this.handleModalClose}
                   >
-                  <Header icon='trash alternate' content='Delete?' />
+                  <Header as='h1' icon='trash alternate' content='Delete?' />
                   <Modal.Content>
-                     <p>
-                        Are you sure you'd like to delete this note?
-                     </p>
+                     <h3>Are you sure you want to delete this note?</h3>
                   </Modal.Content>
                   <Modal.Actions>
                      <Button basic color='green' inverted onClick={this.handleModalClose}>

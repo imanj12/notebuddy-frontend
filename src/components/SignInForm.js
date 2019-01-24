@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, Form, Modal, Message, Container } from 'semantic-ui-react'
+import { Button, Form, Modal, Message} from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom'
 const Cookies = require('cookies-js')
 
