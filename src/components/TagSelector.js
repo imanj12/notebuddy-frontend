@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Segment, Dropdown} from 'semantic-ui-react'
+import { URL } from '../constants/constants'
 const Cookies = require('cookies-js')
 
 class TagSelector extends Component {
@@ -26,7 +27,8 @@ class TagSelector extends Component {
    }
 
    createTagFetch = (tagName) => {
-      const url = 'http://localhost:3000/api/v1/tags'
+      // const url = 'http://localhost:3000/api/v1/tags'
+      const url = URL + '/tags'
       const data = {tag: {name: tagName, user_id: this.props.user.id}}
       const token = Cookies.get('token')
       const fetchParams = {

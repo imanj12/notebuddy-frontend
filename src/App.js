@@ -6,6 +6,7 @@ import Welcome from './container/Welcome'
 import MainInterface from './container/MainInterface'
 import NavBar from './components/NavBar'
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
+import { URL } from './constants/constants'
 const Cookies = require('cookies-js')
 
 class App extends Component {
@@ -19,7 +20,8 @@ class App extends Component {
 
    fetchUser = () => {
       console.log('fetchUser called')
-      const url = 'http://localhost:3000/api/v1/profile'
+      // const url = 'http://localhost:3000/api/v1/profile'
+      const url = URL + '/profile'
       const token = Cookies.get('token')
       const fetchParams = {
          method: 'GET',

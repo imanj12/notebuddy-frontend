@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { Menu, Icon, Popup, Form } from 'semantic-ui-react'
 import SideMenuTagsContainer from '../container/SideMenuTagsContainer'
 import TagsSearch from './TagsSearch'
+import { URL } from '../constants/constants'
 const Cookies = require('cookies-js')
 
 class SideMenu extends Component {
@@ -29,7 +30,8 @@ class SideMenu extends Component {
 	// handle new note submit (closes popup and posts to /notes)
 	handleSubmit = (e) => {
 		this.setState({newNoteIsOpen: false})
-		const url = 'http://localhost:3000/api/v1/notes'
+		// const url = 'http://localhost:3000/api/v1/notes'
+		const url = URL + '/notes'
 		const token = Cookies.get('token')
 		const data = {note: {
 			title: this.state.newNoteValue.trim(),

@@ -6,6 +6,7 @@ import NotesContainer from './NotesContainer'
 import Editor from '../components/Editor'
 import TagSelector from '../components/TagSelector'
 import NotesSearch from '../components/NotesSearch'
+import { URL } from '../constants/constants'
 const Cookies = require('cookies-js')
 
 class MainInterface extends Component {
@@ -59,7 +60,8 @@ class MainInterface extends Component {
 
    saveNote = (title, content) => {
       this.setState({saving: true})
-      const url = `http://localhost:3000/api/v1/notes/${this.state.activeNote}`
+      // const url = `http://localhost:3000/api/v1/notes/${this.state.activeNote}`
+      const url = URL + `/notes/${this.state.activeNote}`
       const token = Cookies.get('token')
       const note_tags_attributes = []
       this.state.currentValues.forEach(tagName => {
@@ -98,7 +100,8 @@ class MainInterface extends Component {
    }
 
    deleteNote = () => {
-      const url = `http://localhost:3000/api/v1/notes/${this.state.activeNote}`
+      // const url = `http://localhost:3000/api/v1/notes/${this.state.activeNote}`
+      const url = URL + `/notes/${this.state.activeNote}`
       const token = Cookies.get('token')
       const fetchParams = {
          method: 'DELETE',

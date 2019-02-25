@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Button, Form, Modal, Message} from 'semantic-ui-react'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { URL } from '../constants/constants'
 const Cookies = require('cookies-js')
 
 class SignInForm extends Component {
@@ -20,7 +21,8 @@ class SignInForm extends Component {
    }
 
    handleLogin = (e) => {
-      const url = 'http://localhost:3000/api/v1/login'
+      // const url = 'http://localhost:3000/api/v1/login'
+      const url = URL + '/login'
       const data = {user: {...this.state}}
       const fetchParams = {
          method: 'POST',

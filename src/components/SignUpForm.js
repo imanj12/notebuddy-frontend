@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react'
 import { Divider, Button, Form, Segment, Message} from 'semantic-ui-react'
 import SignInForm from './SignInForm'
 import {withRouter} from 'react-router-dom'
+import { URL } from '../constants/constants'
 const Cookies = require('cookies-js')
 const Capitalize = require('lodash/capitalize')
 
@@ -20,7 +21,8 @@ class SignUpForm extends Component {
    handleCreateUserClick = (e) => {
       this.setState({errors: null})
       const data = {user: {...this.state}}
-      const url = 'http://localhost:3000/api/v1/users'
+      // const url = 'http://localhost:3000/api/v1/users'
+      const url = URL + '/users'
       const fetchParams = {
          method: 'POST',
          headers: {
