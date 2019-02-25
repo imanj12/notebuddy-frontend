@@ -59,7 +59,10 @@ class SignInForm extends Component {
                      header={this.state.error}
                   />
                ) : (
-                  null
+                  <Message
+                     positive
+                     header="Sign in with username 'iman' and password 'iman' to access the example account"
+                  />
                )}
                <Form size='large' onSubmit={this.handleLogin}>
                   <Form.Input 
