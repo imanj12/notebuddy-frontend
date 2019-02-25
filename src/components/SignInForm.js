@@ -6,8 +6,8 @@ const Cookies = require('cookies-js')
 
 class SignInForm extends Component {
    state = {
-      username: 'iman',
-      password: 'iman',
+      username: 'example@example.com',
+      password: 'example',
       error: null
    }
 
@@ -60,7 +60,7 @@ class SignInForm extends Component {
                   />
                ) : (
                   <Message
-                     header="Sign in with username 'iman' and password 'iman' to access the example account"
+                     header="Sign in with username 'example@example.com' and password 'example' to access the demo account"
                   />
                )}
                <Form size='large' onSubmit={this.handleLogin}>
