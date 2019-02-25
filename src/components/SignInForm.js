@@ -25,9 +25,9 @@ class SignInForm extends Component {
       const url = URL + '/login'
       const data = {user: {...this.state}}
       const fetchParams = {
-         method: 'POST',
+         method: "POST",
          headers: {
-            'Content-Type':'application/json'
+            "Content-Type":"application/json"
          },
          body: JSON.stringify(data)
       }
