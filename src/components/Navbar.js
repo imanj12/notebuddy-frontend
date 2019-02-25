@@ -21,7 +21,7 @@ class NavBar extends Component {
             {this.props.user ? (
                <Menu.Menu position='right'>
                   <Menu.Item>
-                     <Image src='https://i.imgur.com/pZY44Td.jpg' avatar/>
+                     {/* <Image src='https://i.imgur.com/pZY44Td.jpg' avatar/> */}
                      <span>{this.props.user.username}</span>
                   </Menu.Item>
                   <Menu.Item>
