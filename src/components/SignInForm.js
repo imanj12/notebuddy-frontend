@@ -60,7 +60,6 @@ class SignInForm extends Component {
                   />
                ) : (
                   <Message
-                     positive
                      header="Sign in with username 'iman' and password 'iman' to access the example account"
                   />
                )}
