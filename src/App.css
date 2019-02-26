@@ -87,8 +87,8 @@ body {
 /* Editor */
 
 .ql-editor {
-  min-height: 60vh !important;
-  max-height: 60vh;
+  min-height: 50vh !important;
+  max-height: 50vh;
   overflow: hidden;
   overflow-y: scroll;
   overflow-x: scroll;
