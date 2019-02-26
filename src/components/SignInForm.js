@@ -61,7 +61,7 @@ class SignInForm extends Component {
                   />
                ) : (
                   <Message
-                     header="Sign in with username 'example@example.com' and password 'example' to view the app with pre-populated notes."
+                     header="Sign in with username 'example@example.com' and password 'example' to demo the app with pre-populated notes."
                   />
                )}
                <Form size='large' onSubmit={this.handleLogin}>
