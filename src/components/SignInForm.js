@@ -33,6 +33,7 @@ class SignInForm extends Component {
       }
       fetch(url, fetchParams)
          .then(r => r.json())
+         // .then(r => console.log(r))
          .then(data => {
             if (data.error) {
                this.setState({error: data.message})
