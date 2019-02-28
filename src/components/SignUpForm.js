@@ -60,9 +60,9 @@ class SignUpForm extends Component {
             <Segment raised>
                { this.state.errors ? (
                   <Message
-                  negative
-                  header='Please correct the following:'
-                  list={this.mapErrors()}
+                     negative
+                     header='Please correct the following:'
+                     list={this.mapErrors()}
                   />
                ) : (
                   <Message

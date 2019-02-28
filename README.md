@@ -1,14 +1,14 @@
 ## Overview
 
-NoteBuddy uses a React frontend and a Rails [backend](https://github.com/imanj12/notebuddy-backend).
+Scribe (formerly NoteBuddy) uses a React frontend and a Rails [backend](https://github.com/imanj12/notebuddy-backend).
 
-Users can create a new note, edit, and tag the note. Note editing is done using a rich text editor. NoteBuddy supports searching and viewing notes by tag.
+Users can create a new note, edit, and tag the note. Note editing is done using a rich text editor. Scribe supports searching and viewing notes by tag.
 
 ## New User Quick Start Guide
 
 ### Create Account
 
-1. Visit [NoteBuddy](https://notebuddy-frontend.herokuapp.com)
+1. Visit [Scribe](https://notebuddy-frontend.herokuapp.com)
 2. Create a username
 3. Enter a password at least 6 characters in length
 4. After selecting "Sign-Up", user will be taken to the primary app interface
