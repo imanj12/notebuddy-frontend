@@ -13,6 +13,13 @@ Users can create a new note, edit, and tag the note. Note editing is done using 
 3. Enter a password at least 6 characters in length
 4. After selecting "Sign-Up", user will be taken to the primary app interface
 
+### Main Interface
+
+The main interface consists of three elements.
+
+1. A left-side navigation bar with a new note button, an all notes button, and a tags button.
+2. A list of notes that defaults to displaying all your notes by order of last updated. To display notes by tag, select the Tags button in the left-side navigation bar.
+
 ### Create New Note
 
 Create a new note by selecting "New" on the left side navbar and entering a title for the note
@@ -27,4 +34,8 @@ Save or delete the note using the icons to the right of the note title edit box.
 
 ### Tagging
 
-Begin typing in the Tag input box to search by existing tags. Select a tag using the arrow keys or mouse and press enter to select the tag. Alternatively, you can simply press enter without selecting an existing tag to create a new tag. Save the note to persist tags.
+Begin typing in the Tag input box to search by existing tags. Select a tag using the arrow keys or mouse, and press enter to select the tag. Alternatively, you can simply press enter without selecting an existing tag to create a new tag. Save the note to persist tags.
+
+### Search by Tag
+
+You can view tags by selecting the Tags button on the left-side navigation bar. To filter the notes list by a certain tag, simply select the tag. You can search for tags from within this popup as well.
