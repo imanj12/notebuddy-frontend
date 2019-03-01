@@ -24,6 +24,7 @@ class NavBar extends Component {
                <Menu.Item>
                   <span>{this.props.user.username}</span>
                </Menu.Item>
+               
                <Menu.Item>
                   <Button 
                      id='log-out-button'
@@ -34,7 +35,6 @@ class NavBar extends Component {
                   </Button>
                </Menu.Item>
             </Menu.Menu>
-
          </Menu>
       )
    }

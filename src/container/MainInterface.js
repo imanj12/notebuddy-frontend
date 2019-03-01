@@ -16,7 +16,6 @@ class MainInterface extends Component {
          activeNote: null,
          currentValues: [],
          notesSearch: '',
-         // notesSearchEmpty: false,
          activeTag: null,
          createdTags: [],
          saving: false,
@@ -59,7 +58,7 @@ class MainInterface extends Component {
       this.setState({currentValues: valuesArr})
    }
 
-   // save note
+   // save note, provided to Editor
    saveNote = (title, content) => {
       // loader showing note is saving
       this.setState({saving: true})
@@ -198,8 +197,7 @@ class MainInterface extends Component {
             <Grid.Column width={3}>
                <NotesSearch 
                   onNotesSearchChange={this.onNotesSearchChange} 
-                  notesSearch={this.state.notesSearch} 
-                  // searchEmpty={this.state.notesSearchEmpty} 
+                  notesSearch={this.state.notesSearch}
                   activeTag={this.state.activeTag}
                />
                <NotesContainer notes={this.notesContainerFilter()} setActiveNote={this.setActiveNote}/>
@@ -208,8 +206,12 @@ class MainInterface extends Component {
             {/* column 3: editor and tags */}
             {/* to-do: good use case for Redux */}
             <Grid.Column width={12} verticalAlign={this.state.activeNote ? 'top' : 'middle'}>
+               
+               {/* render note/editor UI for state.activeNote, or show placeholder graphic asking user to select or create a note if no state.activeNote */}
                {this.state.activeNote ? (
                   <Fragment key={this.state.activeNote}>
+                     
+                     {/* rich text editor and UI for currently active note */}
                      <Editor 
                         // eslint-disable-next-line
                         note={this.props.user.notes.find(note => note.id == this.state.activeNote)}
@@ -221,6 +223,8 @@ class MainInterface extends Component {
                         saved={this.state.saved}
                         setSaved={this.setSaved}
                         />
+                     
+                     {/* Tag creation and selection interface for currently active note */}
                      <TagSelector 
                         user={this.props.user}
                         // eslint-disable-next-line
@@ -233,6 +237,7 @@ class MainInterface extends Component {
                      />
                   </Fragment>
                ) : (
+                  // placeholder images when editor UI is not visible
                   <Container id='editor-placeholder' textAlign='center'>
                      <img className='editor-placeholder-pic' src={require('../imgs/to-do.png')} alt='to-do'></img>
                      <img className='editor-placeholder-pic' src={require('../imgs/note.png')} alt='note'></img>

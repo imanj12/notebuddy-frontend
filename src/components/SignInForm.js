@@ -15,13 +15,13 @@ class SignInForm extends Component {
       this.setState({[e.target.name]: e.target.value})
    }
 
+   // functions to invoke upon closing of sign-in modal
    handleModalClose = () => {
-      this.setState({username: '', password: ''})
       this.setState({error: null})
    }
 
+   // handle login submit, show errors if provided by backend
    handleLogin = (e) => {
-      // const url = 'http://localhost:3000/api/v1/login'
       const url = URL + '/login'
       const data = {user: {...this.state}}
       const fetchParams = {
@@ -33,7 +33,6 @@ class SignInForm extends Component {
       }
       fetch(url, fetchParams)
          .then(r => r.json())
-         // .then(r => console.log(r))
          .then(data => {
             if (data.error) {
                this.setState({error: data.message})
@@ -42,10 +41,10 @@ class SignInForm extends Component {
                this.props.setUser(data.user)
                this.props.history.push('/home')
             }
-            
          })
    }
 
+   // show log-in window as modal
    render() {
       return (
          <Modal 
@@ -53,6 +52,7 @@ class SignInForm extends Component {
             style={{ maxWidth: 450 }}
             onClose={this.handleModalClose}
          >
+            {/* show error message if sign-in unsuccessful, otherwise show demo account info */}
             <Modal.Content>
                { this.state.error ? (
                   <Message
@@ -64,6 +64,8 @@ class SignInForm extends Component {
                      header="Sign in with username 'example@example.com' and password 'example' to demo the app with pre-populated notes."
                   />
                )}
+
+               {/* sign-in form */}
                <Form size='large' onSubmit={this.handleLogin}>
                   <Form.Input 
                      fluid 
@@ -88,7 +90,6 @@ class SignInForm extends Component {
                      fluid 
                      content='Sign In' 
                      size='large' 
-                     // onClick={this.handleLogin}
                   />
                </Form>
             </Modal.Content>

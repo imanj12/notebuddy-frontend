@@ -18,10 +18,10 @@ class SignUpForm extends Component {
       this.setState({[e.target.name]: e.target.value})
    }
    
+   // create a new user action: will set errors from backend in state.errors, or successfully log-in
    handleCreateUserClick = (e) => {
       this.setState({errors: null})
       const data = {user: {...this.state}}
-      // const url = 'http://localhost:3000/api/v1/users'
       const url = URL + '/users'
       const fetchParams = {
          method: 'POST',
@@ -34,7 +34,6 @@ class SignUpForm extends Component {
          .then(r => r.json())
          .then(data => {
             if (data.errors) {
-               console.log(data.errors)
                this.setState({errors: data.errors})
             } else {
                Cookies.set('token', data.jwt)
@@ -44,6 +43,7 @@ class SignUpForm extends Component {
          })
    }
 
+   // display any errors returned from backend to user
    mapErrors = () => {
       const keys = Object.keys(this.state.errors)
       return keys.map(key => {
@@ -58,6 +58,8 @@ class SignUpForm extends Component {
       return (
          <Fragment> 
             <Segment raised>
+               
+               {/* show erros if there are any, otherwise show welcome message */}
                { this.state.errors ? (
                   <Message
                      negative
@@ -70,6 +72,8 @@ class SignUpForm extends Component {
                      content='Create an account below'
                   />
                ) }
+               
+               {/* sign up/create account form */}
                <Form size='large'>
                   <Form.Input 
                      fluid 
@@ -110,6 +114,7 @@ class SignUpForm extends Component {
             </Segment>
             <Divider horizontal>Or</Divider>
             <Segment>
+               {/* to-do: implement sign-in with google */}
                {/* <Header as='h4'>Use either method to sign in</Header> */}
                {/* <Divider horizontal /> */}
                <SignInForm setUser={this.props.setUser}/>

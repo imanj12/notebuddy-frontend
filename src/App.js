@@ -55,6 +55,8 @@ class App extends Component {
                         <Route path='/home' render={() => <MainInterface user={this.state.user} fetchUser={this.fetchUser}/>}/> 
                         ) : null
                      }
+
+                     {/* show welcome page if not logged in, otherwise redirect to /home if logged in/token cookie is valid */}
                      <Route path='/' render={() => this.state.user ? <Redirect to='/home'/> : <Welcome setUser={this.setUser}/>} /> 
                   </Switch>
                </>

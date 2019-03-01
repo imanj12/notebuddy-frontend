@@ -3,7 +3,7 @@ import {Grid, Header} from 'semantic-ui-react'
 import SignUpForm from '../components/SignUpForm'
 
 class Welcome extends Component {
-   
+   // welcome page to show if new user, or not logged in, or no token in cookies
    render () {
       return (
          <div className='welcome'>
