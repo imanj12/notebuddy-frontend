@@ -5,6 +5,7 @@ const Cookies = require('cookies-js')
 
 class NavBar extends Component {
 
+   // log out functionality
    logOut = () => {
       Cookies.expire('token')
       this.props.setUser(null)
@@ -18,23 +19,22 @@ class NavBar extends Component {
                <img id='navbar-logo' src={require('../imgs/quill-white.png')} alt='scribe logo'></img>
                <p style={{fontSize: '40px'}}>scribe</p>
             </Menu.Item>
-            {this.props.user ? (
-               <Menu.Menu position='right'>
-                  <Menu.Item>
-                     {/* <Image src='https://i.imgur.com/pZY44Td.jpg' avatar/> */}
-                     <span>{this.props.user.username}</span>
-                  </Menu.Item>
-                  <Menu.Item>
-                     <Button 
-                        id='log-out-button'
-                        onClick={this.logOut}
-                        content='Log out'
-                     >
-                        {/* <Icon name='log out'/> */}
-                     </Button>
-                  </Menu.Item>
-               </Menu.Menu>
-            ) : null}
+            
+            <Menu.Menu position='right'>
+               <Menu.Item>
+                  <span>{this.props.user.username}</span>
+               </Menu.Item>
+               <Menu.Item>
+                  <Button 
+                     id='log-out-button'
+                     onClick={this.logOut}
+                     content='Log out'
+                  >
+                     {/* <Icon name='log out'/> */}
+                  </Button>
+               </Menu.Item>
+            </Menu.Menu>
+
          </Menu>
       )
    }

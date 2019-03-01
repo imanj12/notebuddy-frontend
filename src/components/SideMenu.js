@@ -64,14 +64,16 @@ class SideMenu extends Component {
 		this.props.handleTagClick(e.target.name)
 	}
 
+	// handle TagsSearch change
 	onTagSearchChange = (e, data) => {
 		this.setState({tagSearchValue: data.value})
 	}
 
 	render() {
-		// const { activeItem } = this.state
 		return (
 			<Menu fluid secondary icon='labeled' vertical>
+				
+				{/* popup for new note input */}
 				<Popup
 					on='click'
 					position='top right'
@@ -94,6 +96,8 @@ class SideMenu extends Component {
 						</Form>
 					}
 				/>
+				
+				{/* button to show all notes in NotesContainer */}
 				<Menu.Item
 					name='notes'
 					onClick={this.handleItemClick}
@@ -102,6 +106,7 @@ class SideMenu extends Component {
 					<span className='side-menu-icon-text'>All Notes</span>
 				</Menu.Item>
 				
+				{/* popup to browse available tags, search, and select tag to filter notes in NotesContainer */}
 				<Popup
 					on='click'
 					position='top right'

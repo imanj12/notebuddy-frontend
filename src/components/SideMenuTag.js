@@ -7,6 +7,7 @@ const SideMenuTag = (props) => {
       padding: '5px 5px 5px 5px'
    }
 
+   // show tag stylized as a Semantic UI tag label
    return (
       <div style={divStyle}>
          <Label as='a' tag

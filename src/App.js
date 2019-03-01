@@ -15,9 +15,11 @@ class App extends Component {
       this.state = {
          user: null
       }
+      // if JWT token exists in cookies, fetch that user's data
       Cookies.get('token') && this.fetchUser()
    }
 
+   // fetch user as an object containing all of their data
    fetchUser = () => {
       console.log('fetchUser called')
       // const url = 'http://localhost:3000/api/v1/profile'
@@ -35,6 +37,7 @@ class App extends Component {
          .then(data => this.setUser(data.user))
    }
 
+   // set user data object in state
    setUser = (user) => {
       this.setState({user: user})
    }
@@ -44,8 +47,10 @@ class App extends Component {
          <div className='app-container'>
             <BrowserRouter>
                <>
+                  {/* only show navbar after logging in */}
                   {this.state.user ? <NavBar setUser={this.setUser} user={this.state.user}/> : null}
                   <Switch>
+                     {/* /home or main interface only available as a route if logged in */}
                      {this.state.user ? (
                         <Route path='/home' render={() => <MainInterface user={this.state.user} fetchUser={this.fetchUser}/>}/> 
                         ) : null

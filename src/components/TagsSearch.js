@@ -6,7 +6,7 @@ const TagsSearch = (props) => {
    return (
       <Input
          fluid
-         error={false} // make this dynamic when no tags found in search
+         error={false} // to-do: make this dynamic when no tags found in search
          placeholder="Search tags..."
          onChange={props.onTagSearchChange}
          value={props.tagSearchValue}

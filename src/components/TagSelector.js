@@ -13,11 +13,9 @@ class TagSelector extends Component {
       props.setCurrentValues(this.state.currentValues)
    }
    
+   // add new tag to available tags for search dropdown (i.e. it was not available from props.allTags)
    handleAddition = (e, { value }) => {
-      console.log('handle addition value:')
       value = value.trim()
-      // this.props.setSaved(false)
-      console.log(value)
       if (!this.state.options.find(option => option.value === value)) {
          this.setState({
             options: [...this.state.options, { text: value, value }],
@@ -26,8 +24,8 @@ class TagSelector extends Component {
       }
    }
 
+   // create tags on backend
    createTagFetch = (tagName) => {
-      // const url = 'http://localhost:3000/api/v1/tags'
       const url = URL + '/tags'
       const data = {tag: {name: tagName, user_id: this.props.user.id}}
       const token = Cookies.get('token')
@@ -42,20 +40,16 @@ class TagSelector extends Component {
       fetch(url, fetchParams)
          .then(r => r.json())
          .then(data => {
-            console.log('new tag:')
-            console.log(data)
             // this.props.fetchUser()
             this.props.addToCreatedTags({tag_id: data.id, tag_name: data.name})
          })
    }
 
+   // add currently selected tags to state.currentValues, and then provide it to MainInterface via props.setCurrentValues
    handleChange = (e, { value }) => {
       if (value.length > 0) {
          value[value.length - 1] = value[value.length - 1].trim()
       } 
-      console.log('handle change value:')
-      console.log(value)
-      // this.props.setSaved(false)
       this.setState({ 
          currentValues: value
       }, () => {
@@ -69,7 +63,7 @@ class TagSelector extends Component {
             <h2 className='editor-metadata'>Tags</h2>
             <Dropdown 
                options={this.state.options}
-               placeholder='Start typing...'
+               placeholder='Search from existing tags or create a new tag...'
                fluid
                search
                selection

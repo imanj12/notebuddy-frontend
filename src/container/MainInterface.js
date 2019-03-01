@@ -32,19 +32,20 @@ class MainInterface extends Component {
       })
    }
 
-   // determine which note the editor is displaying (props for Editor)
+   // determine which note the  UI editor is displaying (props for Editor)
+   // if null, UI editor window will be blank
    setActiveNote = (noteId) => {
       this.setState({activeNote: noteId})
    }
 
-   // provide all users tags to select from in input box in TagSelector
+   // provide users' tags to select from, for input box in TagSelector
    provideAllTags = () => {
       let options = []
       this.props.user.tags.forEach(tag => options.push({ key: `${tag.id}`, text: `${tag.name}`, value: `${tag.name}` }))
       return options
    }
 
-   // provide current tags of note from state.activeNote to TagSelector
+   // provide current tags of note in state.activeNote to TagSelector
    provideAssignedTags = () => {
       let options = []
       // eslint-disable-next-line
@@ -58,21 +59,28 @@ class MainInterface extends Component {
       this.setState({currentValues: valuesArr})
    }
 
+   // save note
    saveNote = (title, content) => {
+      // loader showing note is saving
       this.setState({saving: true})
-      // const url = `http://localhost:3000/api/v1/notes/${this.state.activeNote}`
+      
       const url = URL + `/notes/${this.state.activeNote}`
       const token = Cookies.get('token')
+      
+      // create note_tags_attributes for rails db to associate selected tags with note
+      // created from both existing tags and new created tags
       const note_tags_attributes = []
       this.state.currentValues.forEach(tagName => {
-         const existingTag = this.props.user.tags.find(tag => tag.name === tagName)
-         const createdTag = this.state.createdTags.find(tag => tag.name === tagName)
+         let existingTag = this.props.user.tags.find(tag => tag.name === tagName)
+         let createdTag = this.state.createdTags.find(tag => tag.name === tagName)
          if (!!existingTag) {
             note_tags_attributes.push({tag_id: existingTag.id})
          } else if (!!createdTag) {
             note_tags_attributes.push({tag_id: createdTag.id})
          }
       })
+      
+      // fetch payload 
       const data = {note: {
          title: title.trim(),
          user_id: this.props.user.id,
@@ -80,6 +88,8 @@ class MainInterface extends Component {
          location: this.state.currentLocation,
          note_tags_attributes: note_tags_attributes
       }}
+      
+      // fetch parameters
       const fetchParams = {
          method: 'PUT',
          headers: {
@@ -93,14 +103,15 @@ class MainInterface extends Component {
          .then(data => {
             this.props.fetchUser()
             setInterval(() => {
+               // clear loading indicator
                this.setState({saving: false})
                this.setSaved(true)
             }, 1500)
          })
    }
 
+   // delete note in backend, then reset UI editor window so blank
    deleteNote = () => {
-      // const url = `http://localhost:3000/api/v1/notes/${this.state.activeNote}`
       const url = URL + `/notes/${this.state.activeNote}`
       const token = Cookies.get('token')
       const fetchParams = {
@@ -115,10 +126,13 @@ class MainInterface extends Component {
          .then(() => this.setState({activeNote: null}))   
    }
 
+   // display whether note is saved or unsaved (i.e. have any changes been made since last successful save fetch)
    setSaved = (boolean) => {
       this.setState({saved: boolean})
    }
 
+   // reverse lookup of user's IP to show where they were when they last saved the note
+   // this is very fuzzy, and relies on given IP being geo-accurate...looking at you T-Mobile
    geoIpLookup = () => {
       fetch('https://geoip-db.com/json/')
          .then(r => r.json())
@@ -127,14 +141,12 @@ class MainInterface extends Component {
          })
    }
 
+   // sets the chosen tag from left navbar so that the notes container/list of notes is updated to show only notes from this tag
    setActiveTag = (tagName) => {
       this.setState({activeTag: tagName})
    }
-   
-   clearNotesSearch = () => {
-      this.setState({notesSearch: ''})
-   }
 
+   // filters the NotesContainer to only show notes either of the selected tag (this.state.activeTag), or from input in NotesSearch
    notesContainerFilter = () => {
       if (this.state.activeTag) {
          // eslint-disable-next-line
@@ -156,15 +168,21 @@ class MainInterface extends Component {
       }
    }
 
+   // handle notes search input change
    onNotesSearchChange = (e, data) => {
       this.setState({notesSearch: data.value})
+   }
+
+   // clear notes search input
+   clearNotesSearch = () => {
+      this.setState({notesSearch: ''})
    }
 
    render() {
       return (
          <Grid columns={3} className='height-94'>
             
-            {/* column 1: side menu */}
+            {/* column 1: left side navigation bar/menu */}
             <Grid.Column width={1} id='side-menu-column'>
                <SideMenu 
                   user={this.props.user} 
@@ -188,6 +206,7 @@ class MainInterface extends Component {
             </Grid.Column>
             
             {/* column 3: editor and tags */}
+            {/* to-do: good use case for Redux */}
             <Grid.Column width={12} verticalAlign={this.state.activeNote ? 'top' : 'middle'}>
                {this.state.activeNote ? (
                   <Fragment key={this.state.activeNote}>
@@ -215,7 +234,6 @@ class MainInterface extends Component {
                   </Fragment>
                ) : (
                   <Container id='editor-placeholder' textAlign='center'>
-                     {/* <img id='editor-arrow' className='editor-placeholder-pic' src={require('../imgs/curved-arrow.png')} alt='left-arrow'/> */}
                      <img className='editor-placeholder-pic' src={require('../imgs/to-do.png')} alt='to-do'></img>
                      <img className='editor-placeholder-pic' src={require('../imgs/note.png')} alt='note'></img>
                      <img className='editor-placeholder-pic' src={require('../imgs/notebook.png')} alt='notebook'></img>
