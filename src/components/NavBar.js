@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Menu, Button, Image} from 'semantic-ui-react'
+import {Menu, Button} from 'semantic-ui-react'
 import {withRouter} from 'react-router-dom'
 const Cookies = require('cookies-js')
 
