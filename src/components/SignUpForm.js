@@ -69,7 +69,7 @@ class SignUpForm extends Component {
                ) : (
                   <Message
                      header='Welcome to scribe'
-                     content='Create an account below'
+                     content='Create an account, or click "Sign-in" below to access your existing account or the demo account with pre-populated data'
                   />
                ) }
                
